@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState, Suspense } from "react";
-import BankImg from "@bank.png";
+import BankImg from "@/public/bank.png";
 import axios from "axios";
 
 import { useRouter, useSearchParams } from "next/navigation";

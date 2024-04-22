@@ -1,15 +1,22 @@
 {
-  "name": "books-pages",
-  "short_name": "books-pages",
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
+  "id": "1",
+  "name": "ONE NOVEL",
+  "short_name": "ONE NOVEL",
+  "Description": "Diet Ecap Attendance",
   "background_color": "#000000",
-
+  "theme_color": "#000000",
+  "start_url": "/",
+  "source": "/",
+  "display": "standalone",
   "icons": [
     {
-      "src": "/logo.png",
-      "sizes": "144x144",
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
