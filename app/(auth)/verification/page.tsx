@@ -12,7 +12,13 @@ import { createPortal } from "react-dom";
 import PopupBox from "@/components/PopupBox";
 import Image from "next/image";
 
-export default function VerificationPage() {}
+export default function VerificationPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerificationComponent />
+    </Suspense>
+  );
+}
 
 function VerificationComponent() {
   const otpInputsRef = useRef<HTMLInputElement[]>([]);

@@ -154,8 +154,8 @@ html {
     flex-direction: column;
     .right {
       order: 0;
-      width: 100%;
-      height: 45%;
+      width: 100% !important;
+      height: 45% !important;
       padding: 0;
       img {
         width: 300px;
@@ -173,7 +173,6 @@ html {
       left: -30px;
       height: 80px;
       background-color: var(--background-color);
-      // background-color: red;
       animation: cross-bar-rotate-mb 5s infinite ease-in-out;
     }
   }
