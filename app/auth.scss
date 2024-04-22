@@ -1,0 +1,232 @@
+.register {
+  display: flex;
+  height: 100vh;
+
+  .left {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    // justify-content: center;
+
+    .errors {
+      margin-bottom: 8px;
+    }
+    .errors .error {
+      &:first-of-type {
+        margin-top: 7px;
+      }
+    }
+    .error {
+      background-color: var(--error);
+      border-radius: 6px;
+      padding-left: 10px;
+      padding: 4px 10px;
+      margin-bottom: 4px;
+      color: var(--on-error);
+      font-size: 13px;
+    }
+
+    .pass-input {
+      position: relative;
+      input {
+        padding-right: 50px;
+        margin-bottom: 0;
+      }
+      .icon {
+        color: rgb(176, 176, 176);
+        position: absolute;
+        right: 22px;
+        font-size: 18px;
+        top: calc(50% - 2px);
+        translate: 0% -50%;
+      }
+    }
+
+    form {
+      width: 65%;
+      justify-content: center;
+      input {
+        margin-bottom: 0;
+      }
+    }
+
+    .link {
+      margin-top: 15px;
+    }
+
+    a {
+      margin-top: 20px;
+      color: rgb(137, 137, 137);
+      font-size: 14px;
+
+      &:hover {
+        color: #b1b1b1;
+      }
+    }
+    width: 55%;
+  }
+
+  .right {
+    width: 45%;
+
+    background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 450px;
+      height: auto;
+      filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.25));
+    }
+  }
+  .heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    user-select: none;
+    gap: 30px;
+    img {
+      width: 75px;
+      height: auto;
+    }
+    .title {
+      font-size: 34px;
+      letter-spacing: 1.4px;
+      word-spacing: 5px;
+      font-family: "Source Serif 4", serif;
+    }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    button {
+      background-color: var(--btn);
+      color: var(--on-btn);
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .loader {
+        margin-right: 10px;
+        width: 25px;
+        height: 25px;
+        border: 3.5px solid #fff;
+        border-bottom-color: rgb(172, 172, 172);
+      }
+    }
+  }
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-bottom-color: #ff3d00;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 768px) {
+  .register {
+    flex-direction: column;
+
+    .left {
+      width: 100%;
+      padding-top: 30px;
+      form {
+        width: 90%;
+        input {
+          padding: 10px 20px;
+          font-size: 18px;
+        }
+      }
+    }
+    .right {
+      width: 100%;
+      display: none;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.otp-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  max-width: 100vw;
+  overflow-x: hidden;
+  .heading {
+    color: var(--on-primary);
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // background-color: red;
+  }
+
+  .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    height: 100%;
+    img {
+      width: 400px;
+      filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.25));
+    }
+  }
+}
+
+.otp-box {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  input.otp {
+    width: 75px;
+    padding: 0;
+    text-align: center;
+    height: 75px;
+    border: 1px solid #c2c2c2;
+    flex: none;
+    // background-color: red;
+  }
+}
+
+@media Screen and (max-width: 768px) {
+  .otp-page {
+    position: relative;
+    overflow-x: hidden;
+  }
+  .otp-box {
+    gap: 12px;
+    input.otp {
+      width: 55px;
+      height: 55px;
+    }
+  }
+}
+@media Screen and (prefers-color-scheme: dark) {
+  .otp-box {
+    input.otp {
+      border: 1px solid #585858;
+    }
+  }
+}
