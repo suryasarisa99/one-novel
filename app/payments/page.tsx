@@ -70,14 +70,15 @@ export default function PaymentsPage() {
 
   return (
     <div className="payments-page split-xpage">
-      {createPortal(
-        <PopupBox
-          title={popupContent.title}
-          content={popupContent.content}
-          onClick={popupContent.onClick}
-        ></PopupBox>,
-        document.getElementById("overlay")!
-      )}
+      {popupIsOpened &&
+        createPortal(
+          <PopupBox
+            title={popupContent.title}
+            content={popupContent.content}
+            onClick={popupContent.onClick}
+          ></PopupBox>,
+          document.getElementById("overlay")!
+        )}
       {/* <div className="left">/ */}
       {/* <TopPageBar title="Payments" onClick={() => {}} /> */}
       <div className="title">Payments</div>
