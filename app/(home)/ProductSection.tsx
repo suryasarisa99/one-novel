@@ -17,14 +17,16 @@ export default function ProductSection() {
     }
     if (user.products.length > 0) return;
 
-    axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER}/payment/pay`, {
-        _id: user._id,
-      })
-      .then((res) => {
-        // open(res.data.url, "_blank");
-        open(res.data.url);
-      });
+    router.push("/payments");
+
+    // axios
+    //   .post(`${process.env.NEXT_PUBLIC_SERVER}/payment/pay`, {
+    //     _id: user._id,
+    //   })
+    //   .then((res) => {
+    //     // open(res.data.url, "_blank");
+    //     open(res.data.url);
+    //   });
   }
 
   return (

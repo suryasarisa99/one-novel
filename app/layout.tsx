@@ -5,7 +5,7 @@ import "./home.scss";
 import "./auth.scss";
 import "./components.scss";
 import "./profile.scss";
-import "./payments.scss";
+import "./withdrawl.scss";
 
 import DataProvider from "@/context/DataContext";
 const inter = Inter({ subsets: ["latin"] });

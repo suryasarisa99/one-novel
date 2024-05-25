@@ -1,0 +1,112 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.payments-page {
+  background-color: var(--primary-color);
+  min-height: 100vh;
+  margin-top: 0;
+
+  .title {
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1.2;
+    padding: 0px 20px;
+  }
+
+  .amount-box {
+    padding: 8px 16px;
+    // background-color: rgb(98, 98, 98);
+    background-color: var(--background-color);
+    margin: 8px 14px;
+    border-radius: 8px;
+
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    .amount {
+      font-size: 20px;
+      font: bold;
+    }
+  }
+
+  .container {
+    margin: 14px;
+    border-radius: 8px;
+    padding: 26px;
+
+    // background-color: rgb(68, 68, 68);
+    background-color: var(--background-color);
+    .qr-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0px 8px;
+      padding-bottom: 26px;
+      width: fit-content;
+      border-radius: 10px;
+      background-color: rgb(255, 255, 255);
+      position: relative;
+      box-shadow: 2px 2px 8px 0px rgba(104, 104, 104, 0.267);
+      img {
+        border-radius: 8px;
+      }
+      a {
+        background-color: var(--btn);
+        color: var(--on-btn);
+        font-size: 14px;
+        font-variant: small-caps;
+        padding: 2px 12px;
+        border-radius: 6px;
+        position: absolute;
+        bottom: 8px;
+      }
+    }
+
+    .or {
+      font-size: 14px;
+      margin-block: 18px;
+    }
+
+    .upi-id-box {
+      padding: 0px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+
+      .left {
+        flex-grow: 1;
+        text-align: left;
+
+        .info {
+          font-size: 14px;
+        }
+        .id {
+          font-size: 18px;
+        }
+      }
+      .icon {
+      }
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 24px;
+    input {
+      margin-top: 4px;
+      padding: 10px 12px;
+    }
+    button {
+      margin-top: 8px;
+      padding: 12px;
+      // width: 100%;
+    }
+  }
+}

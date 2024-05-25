@@ -78,6 +78,7 @@ button {
 .split-page-mb {
   // height: 100vh;
   min-height: 100vh;
+  // height: 100%;
   display: flex;
   overflow: hidden;
   position: relative;
@@ -85,14 +86,14 @@ button {
 
   .left {
     width: 55%;
-    // height: 100%;
+    min-height: 100vh;
     flex-shrink: 0;
     flex-grow: 1;
   }
   .right {
     padding-left: 80px;
     width: 45%;
-    // height: 100%;
+    min-height: 100vh;
     flex-shrink: 0;
     flex-grow: 1;
     background-color: var(--background-color);
@@ -140,6 +141,7 @@ html {
   }
   .split-page {
     width: 100%;
+    overflow-y: initial;
     .cross-bar {
       display: none;
     }

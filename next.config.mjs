@@ -10,5 +10,5 @@ const nextConfig = {
   reactStrictMode: false,
 };
 
-export default withPWA(nextConfig);
-// export default nextConfig;
+// export default withPWA(nextConfig);
+export default nextConfig;

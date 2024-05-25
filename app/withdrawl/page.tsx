@@ -166,7 +166,16 @@ export default function WithdrawlPage() {
   }, [upi, selectedSuggestion]);
 
   return (
-    <div className="withdrawl-page page payment-page split-page">
+    <div className="payment-page split-page">
+      {popupIsOpened &&
+        createPortal(
+          <PopupBox
+            content={popupContent.content}
+            title={popupContent.title}
+            onClick={popupContent.onClick}
+          />,
+          document.getElementById("overlay")!
+        )}
       <div className="left">
         <div className="heading">
           <p className="title">Withdrawl Details</p>
@@ -257,18 +266,8 @@ export default function WithdrawlPage() {
           </button>
         </div>
       </div>
-      {popupIsOpened &&
-        createPortal(
-          <PopupBox
-            content={popupContent.content}
-            title={popupContent.title}
-            onClick={popupContent.onClick}
-          />,
-          document.getElementById("overlay")!
-        )}
-
       <div className="cross-bar"></div>
-      <div className="right"></div>
+      <div className="right" style={{ height: "100%" }}></div>
     </div>
   );
 }

@@ -119,10 +119,10 @@
 
 .payment-page {
   display: flex;
-  overflow-y: auto;
+  // overflow-y: auto;
 
   .left {
-    width: 55%;
+    // width: 55%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -188,6 +188,7 @@
       width: 85%;
       // justify-content: center;
       padding-right: 0px;
+      margin-bottom: 25px;
       button {
         width: 100%;
         padding: 10px 18px;
