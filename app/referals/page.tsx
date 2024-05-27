@@ -22,7 +22,7 @@ export default function TrnasactionsPage() {
   }, []);
   return (
     <div className="transactions-page">
-      <TopPageBar title="Rferals" onClick={() => router.back()} />
+      <TopPageBar title="Referals" onClick={() => router.back()} />
     </div>
   );
 }

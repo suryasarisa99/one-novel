@@ -7,15 +7,27 @@ import PopupBox from "@/components/PopupBox";
 import { createPortal } from "react-dom";
 import axios from "axios";
 import useData from "@/hooks/useData";
+import { useRouter } from "next/navigation";
 
 export default function WithdrawlPage() {
-  const [upi, setUpi] = useState("");
-  const { token } = useData();
+  const { token, user, setUser } = useData();
+  const [upi, setUpi] = useState(user?.upi || "");
   const [bank, setBank] = useState({
-    bank_name: "",
-    account_no: "",
-    ifsc: "",
+    bank_name: user?.bank.bank_name || "",
+    account_no: user?.bank.account_no || "",
+    ifsc: user?.bank.ifsc || "",
   });
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) return;
+    setUpi(user.upi);
+    setBank({
+      bank_name: user.bank.bank_name,
+      account_no: user.bank.account_no,
+      ifsc: user.bank.ifsc,
+    });
+  }, [user?._id]);
 
   const { HidePopup, ShowPopup, popupIsOpened, popupContent, setPopupContent } =
     usePopup();
@@ -45,7 +57,27 @@ export default function WithdrawlPage() {
           },
         }
       )
-      .then((res) => {})
+      .then((res) => {
+        if (!user) return;
+        if (res.data.success) {
+          setUser({
+            ...user,
+            upi: upi,
+            bank: bank,
+            withdrawlType: type,
+          });
+
+          setPopupContent({
+            title: "Success",
+            content: "Withdrawl Request Sent Successfully.",
+            onClick: () => {
+              HidePopup();
+              router.push("/withdrawl");
+            },
+          });
+          ShowPopup();
+        }
+      })
       .catch((err) => {
         console.log(err);
       });

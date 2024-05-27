@@ -4,35 +4,77 @@ import usePopup from "@/hooks/usePopup";
 import PopupBox from "@/components/PopupBox";
 import { useEffect, useState } from "react";
 import useData from "@/hooks/useData";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function WithdrawlPage() {
   const { HidePopup, ShowPopup, setPopupContent, popupContent, popupIsOpened } =
     usePopup();
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState(1000);
   const [showWithdrawlOptions, setShowWithdrawlOptions] = useState(false);
-  const { user, setUser } = useData();
+  const { user, setUser, token } = useData();
   const [choosenWithdrawlType, setChoosenWithdrawlType] = useState(1);
+
+  const router = useRouter();
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!user) return;
+    if (!user) return router.push("/login");
     if (user?.balance < balance) {
       setPopupContent({
         title: "Insufficient Balance",
-        content: "You don't have enough balance",
+        content:
+          "You don't have enough balance, Your Balance is ₹" + user.balance,
         onClick: HidePopup,
       });
+      ShowPopup();
       return;
     } else {
-      setShowWithdrawlOptions(true);
-      document.getElementById("overlay")!.className = "";
-      document.documentElement.style.overflow = "hidden";
-      // setPopupContent({
-      //   title: "Withdrawl Request Sent",
-      //   content: `Wait for the admin to approve the request. You will get the amount in your account soon.`,
-      //   onClick: HidePopup,
-      // });
-      // setUser({ ...user, balance: user.balance - balance });
+      if (user.withdrawlType === 3) {
+        setShowWithdrawlOptions(true);
+        document.getElementById("overlay")!.className = "";
+        document.documentElement.style.overflow = "hidden";
+      } else {
+        setPopupContent({
+          title: "Confirm Withdrawl",
+          content: `Are you sure you want to withdrawl ₹${balance}?`,
+          onClick: () => {
+            handleWithdrawl(user.withdrawlType);
+            HidePopup();
+          },
+        });
+        ShowPopup();
+      }
     }
+  }
+
+  function handleWithdrawl(type: Number) {
+    if (!user) return;
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_SERVER}/auth/withdrawl`,
+        {
+          amount: balance,
+          type: type,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setPopupContent({
+          title: "Withdrawl Request Sent",
+          content: `Wait for the admin to approve the request. You will get the amount in your account soon.`,
+          onClick: HidePopup,
+        });
+        ShowPopup();
+        setUser({ ...user, balance: user.balance - balance });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   useEffect(() => {
@@ -99,16 +141,13 @@ export default function WithdrawlPage() {
               <button
                 onClick={() => {
                   if (!user) return;
-                  // setShowWithdrawlOptions(false);
-                  setPopupContent({
-                    title: "Withdrawl Request Sent",
-                    content: `Wait for the admin to approve the request. You will get the amount in your account soon.`,
-                    onClick: HidePopup,
-                  });
-                  setUser({ ...user, balance: user.balance - balance });
+                  setShowWithdrawlOptions(false);
+                  document.getElementById("overlay")!.className = "hidden";
+                  document.documentElement.style.overflow = "auto";
+                  handleWithdrawl(choosenWithdrawlType);
                 }}
               >
-                Submit
+                Confirm Withdrawl
               </button>
             </center>
           </div>,

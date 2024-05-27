@@ -143,6 +143,24 @@ export default function ProfilePage() {
             </div>
             <div
               className="item-outer"
+              onClick={() => router.push("/withdrawl")}
+            >
+              <div className="item">
+                <span className="label">Withdrawl</span>
+                <FaChevronRight />
+              </div>
+            </div>
+            <div
+              className="item-outer"
+              onClick={() => router.push("/withdrawl-details")}
+            >
+              <div className="item">
+                <span className="label">Update Withdrawl Details</span>
+                <FaChevronRight />
+              </div>
+            </div>
+            <div
+              className="item-outer"
               onClick={() => {
                 router.push("/register");
                 localStorage.removeItem("token");

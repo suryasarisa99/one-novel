@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useData from "@/hooks/useData";
@@ -13,17 +13,33 @@ import "@/public/logo.png";
 
 export default function TopBar() {
   const router = useRouter();
-
   const { user } = useData();
+
+  useEffect(() => {
+    router.prefetch("/profile");
+    router.prefetch("/login");
+    router.prefetch("/withdrawl");
+    router.prefetch("/withdrawl-details");
+  }, []);
+
   return (
     <nav>
       <Image src={logo} className="logo" alt="" />
       <ul className="menu">
         <li>
-          <Link href="/profile" className="link">
+          {/* <Link href="/profile" className="link">
             <FaRegUser className="outline" size={22} />
             <FaUser className="fill" size={22} />
-          </Link>
+          </Link> */}
+          <span
+            onClick={() => {
+              if (!user) return router.push("/login");
+              router.push("/profile");
+            }}
+          >
+            <FaRegUser className="outline" size={22} />
+            <FaUser className="fill" size={22} />
+          </span>
         </li>
 
         <li className="wallet">

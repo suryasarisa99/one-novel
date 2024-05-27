@@ -88,10 +88,16 @@ button {
     width: 100%;
   }
 }
+.split-page {
+  .left,
+  .right {
+    min-height: 100vh;
+  }
+}
 .split-page,
 .split-page-mb {
-  // height: 100vh;
   min-height: 100vh;
+  // height: 100vh;
   // height: 100%;
   display: flex;
   overflow: hidden;
@@ -100,14 +106,12 @@ button {
 
   .left {
     width: 55%;
-    min-height: 100vh;
     flex-shrink: 0;
     flex-grow: 1;
   }
   .right {
     padding-left: 80px;
     width: 45%;
-    min-height: 100vh;
     flex-shrink: 0;
     flex-grow: 1;
     background-color: var(--background-color);
