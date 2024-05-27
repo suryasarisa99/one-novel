@@ -37,7 +37,9 @@ export default function TopBar() {
             <button
               className="withdrawl-btn"
               onClick={() => {
-                router.push("/withdrawl");
+                if (!user) return router.push("/login");
+                if (user.withdrawlType === 0) router.push("/withdrawl-details");
+                else router.push("/withdrawl");
               }}
             >
               With Drawl

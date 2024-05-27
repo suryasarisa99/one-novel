@@ -74,6 +74,20 @@ button {
   display: none;
 }
 
+.center-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 650px) {
+  .center-page {
+    width: 100%;
+  }
+}
 .split-page,
 .split-page-mb {
   // height: 100vh;

@@ -5,6 +5,7 @@ import "./home.scss";
 import "./auth.scss";
 import "./components.scss";
 import "./profile.scss";
+import "./withdrawl-details.scss";
 import "./withdrawl.scss";
 
 import DataProvider from "@/context/DataContext";

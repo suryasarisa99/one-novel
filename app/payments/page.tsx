@@ -69,7 +69,7 @@ export default function PaymentsPage() {
   }
 
   return (
-    <div className="payments-page split-xpage">
+    <div className="payments-page center-page  split-xpage">
       {popupIsOpened &&
         createPortal(
           <PopupBox
