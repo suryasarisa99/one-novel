@@ -9,9 +9,9 @@ export default function HorizontalCarousel() {
   return (
     <div className="horizontal-carousel home-pagex-section">
       <HomeSection />
-      <WriterSection1 />
-      <WriterSection2 />
-      <WriterSection3 />
+      {/* <WriterSection1 /> */}
+      {/* <WriterSection2 /> */}
+      {/* <WriterSection3 /> */}
     </div>
   );
 }
