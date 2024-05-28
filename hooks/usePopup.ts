@@ -29,6 +29,7 @@ export default function usePopup() {
     title: "",
     content: "",
     onClick: HidePopup,
+    btnText: "",
   });
 
   return {

@@ -40,6 +40,7 @@ export default function PaymentsPage() {
       setPopupContent({
         title: "UTR Number Required",
         content: "Please Enter UTR After the Payment is Done",
+        btnText: "Ok",
         onClick: HidePopup,
       });
       ShowPopup();
@@ -56,6 +57,7 @@ export default function PaymentsPage() {
           title: "Admin Will Verify Your Payment Soon",
           content:
             "Please Wait for a while, Admin will verify your payment soon and product will be brought to you Automatically.",
+          btnText: "Ok",
           onClick: () => {
             HidePopup();
             router.back();
@@ -76,6 +78,7 @@ export default function PaymentsPage() {
             title={popupContent.title}
             content={popupContent.content}
             onClick={popupContent.onClick}
+            btnText={popupContent.btnText}
           ></PopupBox>,
           document.getElementById("overlay")!
         )}

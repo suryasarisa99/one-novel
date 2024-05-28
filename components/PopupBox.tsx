@@ -4,6 +4,7 @@ type PopupBoxProps = {
   children?: React.ReactNode;
   content?: string;
   title: string;
+  btnText?: string;
   onClick: () => void;
 };
 
@@ -11,6 +12,7 @@ export default function PopupBox({
   children,
   content,
   title,
+  btnText = "OK",
   onClick,
 }: PopupBoxProps) {
   return (
@@ -24,7 +26,7 @@ export default function PopupBox({
       </div>
       <div className="text">{content}</div>
       <div className="buttons">
-        <button onClick={onClick}>OK</button>
+        <button onClick={onClick}>{btnText}</button>
       </div>
     </motion.div>
   );

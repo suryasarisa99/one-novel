@@ -7,6 +7,7 @@ import WhySection from "./WhySection";
 import AboutSection from "./AboutSection";
 // import "./home.scss";
 import useData from "@/hooks/useData";
+import HorizontalCarousel from "./HorizontalCarousel";
 
 export default function Home() {
   //   const { isLoggedIn } = useData();
@@ -59,7 +60,8 @@ export default function Home() {
   }, []);
   return (
     <div className="home">
-      <HomeSection />
+      {/* <HomeSection /> */}
+      <HorizontalCarousel />
       <ProductSection />
       <WhySection />
       <AboutSection />

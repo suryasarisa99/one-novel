@@ -10,6 +10,7 @@ import { createPortal } from "react-dom";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import PopupBox from "@/components/PopupBox";
 import axios from "axios";
+import usePopup from "@/hooks/usePopup";
 
 export default function RegisterComponent() {
   return (
@@ -25,44 +26,26 @@ function Register() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [securityQuestion, setSecurityQuestion] = useState(-1);
+  const [securityAnswer, setSecurityAnswer] = useState("");
   const searchParams = useSearchParams();
   const router = useRouter();
   const [referralCode, setReferralCode] = useState(
     searchParams.get("ref") || ""
   );
+  const securityQuestions = [
+    "What is your Favourite Color ?",
+    "What is your Pet's Name ?",
+    "What is your Favourite Food ?",
+    "What is your Favourite Movie ?",
+    "Where were you born ?",
+    "What is your Nickname ?",
+  ];
   const [loading, setLoading] = useState(false);
 
-  const [PopupContent, setPopupContent] = useState({
-    title: "",
-    content: "",
-  });
+  const { popupIsOpened, ShowPopup, HidePopup, popupContent, setPopupContent } =
+    usePopup();
 
-  const [popup, setPopup] = useState(false);
-  function ShowOverlay() {
-    const overlay = document.getElementById("overlay");
-    const body = document.querySelector("body");
-    if (overlay && body) {
-      overlay.style.display = "block";
-      body.style.overflow = "hidden";
-    }
-  }
-  function HideOverlay() {
-    const overlay = document.getElementById("overlay");
-    const body = document.querySelector("body");
-    if (overlay && body) {
-      overlay.style.display = "none";
-      body.style.overflow = "auto";
-    }
-  }
-  function showPopup() {
-    setPopup(true);
-    ShowOverlay();
-  }
-
-  function hidePopup() {
-    setPopup(false);
-    HideOverlay();
-  }
   function reducerFunction(
     state: typeof defaultError,
     action: {
@@ -89,12 +72,22 @@ function Register() {
     if (loading) setLoading(false);
     let error = false;
 
-    if (!name || !phone || !email || !password || !referralCode) {
+    if (
+      !name ||
+      !phone ||
+      !email ||
+      !password ||
+      !referralCode ||
+      securityQuestion === -1 ||
+      !securityAnswer
+    ) {
       setPopupContent({
         title: "All Fields Required",
         content: "Please fill all the fields to continue.",
+        onClick: HidePopup,
+        btnText: "Ok",
       });
-      showPopup();
+      ShowPopup();
       return;
     }
 
@@ -150,10 +143,24 @@ function Register() {
         number: phone,
         password,
         referal: referralCode,
+        security: {
+          question: securityQuestion,
+          answer: securityAnswer,
+        },
       })
       .then((res) => {
         console.log(res.data);
-        router.push(`/verification?id=${res.data.id}`);
+        // router.push(`/verification?id=${res.data.id}&email=${email}`);
+        setPopupContent({
+          title: "Successfully Registered",
+          content:
+            "User Registeration is  Successfull. Please Login to Continue.",
+          onClick: () => {
+            HidePopup();
+            router.push("/login");
+          },
+          btnText: "Login Now",
+        });
       })
       .catch((err) => {
         console.log(err.response.data.error);
@@ -163,6 +170,8 @@ function Register() {
               title: "Invalid Referral Code",
               content:
                 "The referral code you entered is invalid. Please check and try again.",
+              onClick: HidePopup,
+              btnText: "Try Again",
             });
             break;
           }
@@ -171,11 +180,13 @@ function Register() {
               title: "User Already Exists",
               content:
                 "The Phone Number you entered is already registered. Please login to continue. or try with another number.",
+              onClick: HidePopup,
+              btnText: "Ok",
             });
             break;
           }
         }
-        showPopup();
+        ShowPopup();
       })
       .finally(() => {
         setLoading(false);
@@ -270,6 +281,26 @@ function Register() {
             onChange={(e) => setReferralCode(e.target.value)}
           />
           <div className="errors"></div>
+          <select
+            value={securityQuestion}
+            onChange={(e) => setSecurityQuestion(+e.target.value)}
+          >
+            <option value="" disabled selected>
+              Select the Security Question
+            </option>
+            {securityQuestions.map((question, i) => (
+              <option key={i}>{question}</option>
+            ))}
+          </select>
+          <input
+            type="text"
+            value={securityAnswer}
+            onChange={(e) => setSecurityAnswer(e.target.value)}
+            placeholder="Answer to Security Question"
+          />
+          <div className="errors"></div>
+          <div className="errors"></div>
+
           <button type="submit">
             {loading ? <div className="loader"></div> : "Register"}
           </button>
@@ -283,12 +314,13 @@ function Register() {
           <Link href="/login">Already Have An Account ? Login</Link>
         </motion.div>
       </div>
-      {popup &&
+      {popupIsOpened &&
         createPortal(
           <PopupBox
-            title={PopupContent.title}
-            content={PopupContent.content}
-            onClick={hidePopup}
+            title={popupContent.title}
+            content={popupContent.content}
+            onClick={popupContent.onClick}
+            btnText={popupContent.btnText}
           ></PopupBox>,
           document.getElementById("overlay")!
         )}

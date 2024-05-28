@@ -74,6 +74,7 @@ export default function WithdrawlPage() {
               HidePopup();
               router.push("/withdrawl");
             },
+            btnText: "Withdrawl Now",
           });
           ShowPopup();
         }
@@ -103,6 +104,7 @@ export default function WithdrawlPage() {
           title: "Invalid UPI ID",
           content: "Please enter a valid UPI Id.",
           onClick: HidePopup,
+          btnText: "Try Again",
         });
         ShowPopup();
       }
@@ -122,6 +124,7 @@ export default function WithdrawlPage() {
           title: "Invalid UPI ID",
           content: "Please enter a valid UPI Id.",
           onClick: HidePopup,
+          btnText: "Try Again",
         });
         ShowPopup();
       }
@@ -135,6 +138,7 @@ export default function WithdrawlPage() {
         content:
           "Enter Both Details or Any One Of Them, But Can't Enter Partial Details.",
         onClick: HidePopup,
+        btnText: "Ok",
       });
       ShowPopup();
     }
@@ -216,6 +220,7 @@ export default function WithdrawlPage() {
             content={popupContent.content}
             title={popupContent.title}
             onClick={popupContent.onClick}
+            btnText={popupContent.btnText}
           />,
           document.getElementById("overlay")!
         )}

@@ -25,6 +25,7 @@ export default function WithdrawlPage() {
         content:
           "You don't have enough balance, Your Balance is ₹" + user.balance,
         onClick: HidePopup,
+        btnText: "Ok",
       });
       ShowPopup();
       return;
@@ -41,6 +42,7 @@ export default function WithdrawlPage() {
             handleWithdrawl(user.withdrawlType);
             HidePopup();
           },
+          btnText: "Yes",
         });
         ShowPopup();
       }
@@ -68,6 +70,7 @@ export default function WithdrawlPage() {
           title: "Withdrawl Request Sent",
           content: `Wait for the admin to approve the request. You will get the amount in your account soon.`,
           onClick: HidePopup,
+          btnText: "Ok",
         });
         ShowPopup();
         setUser({ ...user, balance: user.balance - balance });
@@ -91,6 +94,7 @@ export default function WithdrawlPage() {
             title={popupContent.title}
             content={popupContent.content}
             onClick={popupContent.onClick}
+            btnText={popupContent.btnText}
           />,
           document.getElementById("overlay")!
         )}

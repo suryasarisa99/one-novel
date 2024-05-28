@@ -24,6 +24,7 @@ function VerificationComponent() {
   const otpInputsRef = useRef<HTMLInputElement[]>([]);
   const searchParams = useSearchParams();
   const id = searchParams.get("id") || "";
+  const email = searchParams.get("email") || "";
   const router = useRouter();
 
   const { setUser, setToken, setIsLoggedIn } = useData();
@@ -53,6 +54,7 @@ function VerificationComponent() {
               HidePopup();
               router.push("/");
             },
+            btnText: "Go Home",
           });
           ShowPopup();
         }
@@ -65,6 +67,7 @@ function VerificationComponent() {
               title: "Invalid OTP",
               content: "The OTP entered is invalid. Please Enter a valid OTP.",
               onClick: HidePopup,
+              btnText: "Try Again",
             });
             break;
           }
@@ -73,6 +76,7 @@ function VerificationComponent() {
               title: "OTP Expired",
               content: "The old OTP has expired. A new OTP has been sent.",
               onClick: HidePopup,
+              btnText: "Try Again",
             });
             break;
           }
@@ -82,6 +86,7 @@ function VerificationComponent() {
               content:
                 "The user is already verified. Please login to continue.",
               onClick: HidePopup,
+              btnText: "Login Now",
             });
             break;
           }
@@ -90,6 +95,7 @@ function VerificationComponent() {
               title: err.response.data.error,
               content: "An error occured. Please try again.",
               onClick: HidePopup,
+              btnText: "Try Again",
             });
           }
         }
@@ -149,6 +155,9 @@ function VerificationComponent() {
         <div className="heading">
           <p className="title">Enter OTP</p>
         </div>
+        <center>
+          <p className="info">OTP Is Sent to {email} mail</p>
+        </center>
         <div className="otp-box">
           {[...Array(4)].map((_, i) => (
             <input
@@ -164,6 +173,9 @@ function VerificationComponent() {
             />
           ))}
         </div>
+        <center>
+          <button onClick={Submit}>Submit</button>
+        </center>
       </div>
       {popupIsOpened &&
         createPortal(

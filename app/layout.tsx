@@ -7,6 +7,7 @@ import "./components.scss";
 import "./profile.scss";
 import "./withdrawl-details.scss";
 import "./withdrawl.scss";
+import "./horizontal-carousel.scss";
 
 import DataProvider from "@/context/DataContext";
 const inter = Inter({ subsets: ["latin"] });
