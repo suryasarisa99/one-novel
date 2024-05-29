@@ -1,8 +1,21 @@
+"use client";
+
 import React from "react";
+import useData from "@/hooks/useData";
 // import pdfFile from "@/public/jannu.pdf";
 
 export default function PdfViewer() {
-  //   const pdfFile = "../../assets/jannu.pdf"; // Replace with your PDF file path
+  // const pdfFile = "../../assets/jannu.pdf"; // Replace with your PDF file path
+
+  const { user } = useData();
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
+  if (user.products.length === 0) {
+    return <div> You Can&apos;t have Access To it</div>;
+  }
 
   return (
     <div

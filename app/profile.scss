@@ -197,10 +197,10 @@
         &.pending {
           color: #f0ad4e;
         }
-        .accepted {
+        &.accepted {
           color: green;
         }
-        .rejected {
+        &.rejected {
           color: red;
         }
       }

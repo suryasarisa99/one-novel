@@ -33,7 +33,7 @@ export default function TrnasactionsPage() {
                 </p>
                 <p
                   className={
-                    "amount " + (transaction.is_debit ? "added" : "deducted")
+                    "amount " + (transaction.is_debit ? "deducted" : "added")
                   }
                 >
                   {transaction.amount}
