@@ -15,27 +15,11 @@ export default function HomeSection({
 }) {
   const router = useRouter();
   const { isLoggedIn } = useData();
-  const [showWriterPopup, setShowWriterPopup] = useState(false);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     document.getElementById("overlay")!.className = "";
-  //     document.documentElement.style.overflow = "auto";
-  //     setShowWriterPopup(true);
-  //   }, 1000);
-  // }, []);
   return (
     <div
       className="home-page home-page-section horizontal-section page"
       id="home"
     >
-      {showWriterPopup &&
-        createPortal(
-          <div className="writer-popup">
-            <h2>Writers Benfit Program</h2>
-          </div>,
-          document.getElementById("overlay")!
-        )}
       <motion.p
         initial={{ opacity: 0, y: 150 }}
         transition={{ delay: 0.3, duration: 0.4 }}

@@ -134,12 +134,12 @@ export default function ProfilePage() {
                 <FaChevronRight />
               </div>
             </div>
-            <div className="item-outer" onClick={() => router.push("/parents")}>
+            {/* <div className="item-outer" onClick={() => router.push("/parents")}>
               <div className="item">
                 <span className="label">Parents</span>
                 <FaChevronRight />
               </div>
-            </div>
+            </div> */}
 
             <div
               className="item-outer"
