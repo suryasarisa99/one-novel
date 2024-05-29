@@ -165,7 +165,7 @@
       .left {
         padding-top: 55px;
         // background-color: red;
-        height: 58vh;
+        height: 50vh;
         gap: 20px;
         .title {
           font-size: 24px;
@@ -178,7 +178,10 @@
       }
       .right {
         // background-color: green;
-        height: 42vh;
+        height: 50vh;
+        justify-content: start;
+        padding-top: 25px;
+
         .feature {
           margin-bottom: 25px;
           .num {

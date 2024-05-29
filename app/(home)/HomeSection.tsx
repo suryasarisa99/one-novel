@@ -8,7 +8,11 @@ import { useRouter } from "next/navigation";
 import useData from "@/hooks/useData";
 import Image from "next/image";
 import { createPortal } from "react-dom";
-export default function HomeSection() {
+export default function HomeSection({
+  stopAutoScroll,
+}: {
+  stopAutoScroll: () => void;
+}) {
   const router = useRouter();
   const { isLoggedIn } = useData();
   const [showWriterPopup, setShowWriterPopup] = useState(false);
@@ -48,7 +52,10 @@ export default function HomeSection() {
           transition={{ delay: 0.4, duration: 0.3 }}
           whileInView={{ opacity: 1, y: 0 }}
           className="floating-btn"
-          onClick={() => router.push("/register")}
+          onClick={() => {
+            stopAutoScroll();
+            router.push("/register");
+          }}
         >
           JOIN NOW
         </motion.button>

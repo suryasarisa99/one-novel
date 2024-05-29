@@ -49,15 +49,15 @@ export default function HorizontalCarousel() {
   }
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   autoScroll();
-    // }, 2500);
-    // hcarouselREf.current?.addEventListener("scroll", handleScroll);
-    // return () => {
-    //   hcarouselREf.current?.removeEventListener("scroll", handleScroll);
-    //   clearTimeout(timeoutRef.current as number);
-    //   clearTimeout(scrollTimeoutRef.current as number);
-    // };
+    setTimeout(() => {
+      autoScroll();
+    }, 2700);
+    hcarouselREf.current?.addEventListener("scroll", handleScroll);
+    return () => {
+      hcarouselREf.current?.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeoutRef.current as number);
+      clearTimeout(scrollTimeoutRef.current as number);
+    };
   }, []);
 
   return (
@@ -67,7 +67,7 @@ export default function HorizontalCarousel() {
         className="horizontal-carousel home-pagex-section"
         ref={hcarouselREf}
       >
-        <HomeSection />
+        <HomeSection stopAutoScroll={stopAutoScroll} />
         <WriterSection1 />
         <WriterSection2 />
         <WriterSection3 />
