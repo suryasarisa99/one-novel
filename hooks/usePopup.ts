@@ -5,6 +5,7 @@ function ShowOverlay() {
   if (overlay && body) {
     overlay.style.display = "block";
     body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
   }
 }
 function HideOverlay() {
@@ -13,6 +14,7 @@ function HideOverlay() {
   if (overlay && body) {
     overlay.style.display = "none";
     body.style.overflow = "auto";
+    document.documentElement.style.overflow = "auto";
   }
 }
 export default function usePopup() {

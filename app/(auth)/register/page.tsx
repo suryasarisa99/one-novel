@@ -22,11 +22,14 @@ export default function RegisterComponent() {
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [securityQuestion, setSecurityQuestion] = useState(-1);
+
   const [securityAnswer, setSecurityAnswer] = useState("");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -49,7 +52,13 @@ function Register() {
   function reducerFunction(
     state: typeof defaultError,
     action: {
-      type: "name" | "email" | "phone" | "password" | "referralCode";
+      type:
+        | "name"
+        | "email"
+        | "phone"
+        | "password"
+        | "referralCode"
+        | "samePassword";
       payload: boolean | { empty: boolean; invalid: boolean };
     }
   ) {
@@ -63,6 +72,7 @@ function Register() {
     email: false,
     phone: false,
     password: false,
+    samePassword: false,
   };
   const [error, dispatchError] = useReducer(reducerFunction, defaultError);
 
@@ -78,8 +88,8 @@ function Register() {
       !email ||
       !password ||
       !referralCode ||
-      securityQuestion === -1 ||
-      !securityAnswer
+      // securityQuestion === -1 ||  !securityAnswer ||
+      !confirmPassword
     ) {
       setPopupContent({
         title: "All Fields Required",
@@ -132,6 +142,14 @@ function Register() {
         payload: false,
       });
     }
+
+    if (password !== confirmPassword) {
+      dispatchError({
+        type: "samePassword",
+        payload: true,
+      });
+      error = true;
+    }
     if (error) return;
 
     setLoading(true);
@@ -161,6 +179,7 @@ function Register() {
           },
           btnText: "Login Now",
         });
+        ShowPopup();
       })
       .catch((err) => {
         console.log(err.response.data.error);
@@ -207,7 +226,7 @@ function Register() {
     console.log("Form Submitted");
   }
   return (
-    <div className="register split-page">
+    <div className="register auth split-page">
       <div className="cross-bar"></div>
       <div className="left">
         <div className="heading">
@@ -274,6 +293,26 @@ function Register() {
               </div>
             )}
           </div>
+          <div className="pass-input">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirm your password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+
+            <div
+              className="icon"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+            </div>
+          </div>
+          <div className="errors">
+            {error.samePassword && (
+              <div className="error">Password Not Match</div>
+            )}
+          </div>
           <input
             type="text"
             placeholder="Referal code"
@@ -281,7 +320,7 @@ function Register() {
             onChange={(e) => setReferralCode(e.target.value)}
           />
           <div className="errors"></div>
-          <select
+          {/* <select
             value={securityQuestion}
             onChange={(e) => setSecurityQuestion(+e.target.value)}
           >
@@ -298,8 +337,7 @@ function Register() {
             onChange={(e) => setSecurityAnswer(e.target.value)}
             placeholder="Answer to Security Question"
           />
-          <div className="errors"></div>
-          <div className="errors"></div>
+          <div className="errors"></div> */}
 
           <button type="submit">
             {loading ? <div className="loader"></div> : "Register"}

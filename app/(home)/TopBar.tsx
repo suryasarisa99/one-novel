@@ -11,7 +11,11 @@ import { IoWalletOutline, IoWallet } from "react-icons/io5";
 
 import "@/public/logo.png";
 
-export default function TopBar() {
+export default function TopBar({
+  stopAutoScroll,
+}: {
+  stopAutoScroll: () => void;
+}) {
   const router = useRouter();
   const { user } = useData();
 
@@ -33,6 +37,7 @@ export default function TopBar() {
           </Link> */}
           <span
             onClick={() => {
+              stopAutoScroll();
               if (!user) return router.push("/login");
               router.push("/profile");
             }}
@@ -53,6 +58,7 @@ export default function TopBar() {
             <button
               className="withdrawl-btn"
               onClick={() => {
+                stopAutoScroll();
                 if (!user) return router.push("/login");
                 if (user.withdrawlType === 0) router.push("/withdrawl-details");
                 else router.push("/withdrawl");

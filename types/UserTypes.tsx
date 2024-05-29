@@ -1,3 +1,9 @@
+type UserChildrenType = {
+  _id: string;
+  valid: boolean;
+  name: String;
+};
+
 export type UserType = {
   name: string;
   _id: string;
@@ -6,7 +12,16 @@ export type UserType = {
   balance: number;
   verified: boolean;
   parents: string[];
-  transactions: any[];
+  transactions: {
+    _id: string;
+    transaction_id: string;
+    status: String;
+    transaction_type: String;
+    fromUser: string;
+    amount: number;
+    date: string;
+    is_debit: boolean;
+  }[];
   products: string[];
   bank: {
     bank_name: string;
@@ -16,10 +31,10 @@ export type UserType = {
   upi: string;
   withdrawlType: number;
   children: {
-    level1: { _id: string; valid: boolean }[];
-    level2: { _id: string; valid: boolean }[];
-    level3: { _id: string; valid: boolean }[];
-    level4: { _id: string; valid: boolean }[];
-    level5: { _id: string; valid: boolean }[];
+    level1: UserChildrenType[];
+    level2: UserChildrenType[];
+    level3: UserChildrenType[];
+    level4: UserChildrenType[];
+    level5: UserChildrenType[];
   };
 };

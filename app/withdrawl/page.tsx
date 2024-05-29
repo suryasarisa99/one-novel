@@ -15,6 +15,11 @@ export default function WithdrawlPage() {
   const { user, setUser, token } = useData();
   const [choosenWithdrawlType, setChoosenWithdrawlType] = useState(1);
 
+  useEffect(() => {
+    if (!user) return;
+    if (user.withdrawlType == 0) router.push("/withdrawl-details");
+  }, []);
+
   const router = useRouter();
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -161,15 +166,13 @@ export default function WithdrawlPage() {
       <h1>Withdrawl Money</h1>
 
       <form onSubmit={handleSubmit}>
-        <label>
-          Amount:
-          <input
-            type="number"
-            value={balance}
-            onChange={(e) => setBalance(e.target.valueAsNumber)}
-            name="amount"
-          />
-        </label>
+        <input
+          type="number"
+          placeholder="Enter Amount"
+          value={balance}
+          onChange={(e) => setBalance(e.target.valueAsNumber)}
+          name="amount"
+        />
         <button type="submit">Withdrawl</button>
       </form>
     </div>

@@ -13,20 +13,21 @@ export default function WithdrawlPage() {
   const { token, user, setUser } = useData();
   const [upi, setUpi] = useState(user?.upi || "");
   const [bank, setBank] = useState({
-    bank_name: user?.bank.bank_name || "",
-    account_no: user?.bank.account_no || "",
-    ifsc: user?.bank.ifsc || "",
+    bank_name: user?.bank?.bank_name || "",
+    account_no: user?.bank?.account_no || "",
+    ifsc: user?.bank?.ifsc || "",
   });
   const router = useRouter();
 
   useEffect(() => {
     if (!user) return;
-    setUpi(user.upi);
-    setBank({
-      bank_name: user.bank.bank_name,
-      account_no: user.bank.account_no,
-      ifsc: user.bank.ifsc,
-    });
+    if (user.upi) setUpi(user.upi);
+    if (user.bank)
+      setBank({
+        bank_name: user?.bank?.bank_name,
+        account_no: user?.bank?.account_no,
+        ifsc: user.bank.ifsc,
+      });
   }, [user?._id]);
 
   const { HidePopup, ShowPopup, popupIsOpened, popupContent, setPopupContent } =
@@ -178,8 +179,9 @@ export default function WithdrawlPage() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const filterSuggestions = suggestions.filter((sugg) =>
-        sugg.s.includes(upi.split("@")[1])
+      const filterSuggestions = suggestions.filter(
+        (sugg) =>
+          sugg.s.includes(upi.split("@")[1]) && sugg.s !== upi.split("@")[1]
       );
       const filterSuggestionsLen = filterSuggestions.length;
       console.log("len: ", filterSuggestionsLen);
@@ -243,8 +245,9 @@ export default function WithdrawlPage() {
           />
           {upi.includes("@") &&
             !hideSuggestions &&
-            suggestions.filter((s) => s.s.includes(upi.split("@")[1])).length >
-              0 && (
+            suggestions.filter(
+              (s) => s.s.includes(upi.split("@")[1]) && s.s != upi.split("@")[1]
+            ).length > 0 && (
               <div className="suggestions">
                 {suggestions
                   .filter((sugg) => sugg.s.includes(upi.split("@")[1]))

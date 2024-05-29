@@ -11,17 +11,19 @@
 
   &.sec1 {
     .content {
+      margin-top: 80px;
       display: flex;
       .writer-img {
         width: 50vw;
-        height: 100vh;
+        height: 100%;
         object-fit: cover;
         flex-shrink: 0;
+        border-radius: 20px;
       }
       .right {
         flex-shrink: 0;
         width: 50vw;
-        height: 100vh;
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -51,6 +53,7 @@
       }
       img {
         width: 75%;
+        border-radius: 16px;
       }
     }
     .right {
@@ -99,6 +102,7 @@
         object-fit: cover;
         width: 100%;
         height: 48vw;
+        border-radius: 20px;
       }
     }
     .right {
@@ -125,12 +129,19 @@
 
 @media screen and (max-width: 1000px) {
   .horizontal-section {
+    overflow-y: hidden !important;
+    height: 100vh;
     &.sec1 {
       .content {
         flex-direction: column;
+        align-items: center;
+        margin-top: 75px;
+        overflow-y: hidden !important;
+        height: 100vh;
+
         .writer-img {
-          height: 50vh;
-          width: 100vw;
+          height: 45vh;
+          width: 90vw;
         }
         .right {
           height: 40vh;
@@ -143,25 +154,39 @@
 
     &.sec2 {
       flex-direction: column;
+      overflow-y: hidden !important;
+      height: 100vh;
+
       .left,
       .right {
         width: 100vw;
-        height: 45vh;
+        object-fit: cover;
       }
       .left {
+        padding-top: 55px;
+        // background-color: red;
+        height: 58vh;
+        gap: 20px;
         .title {
-          font-size: 28px;
+          font-size: 24px;
+          // margin-bottom: 0px;
+        }
+        img {
+          width: 85vw;
+          object-fit: cover;
         }
       }
       .right {
+        // background-color: green;
+        height: 42vh;
         .feature {
-          margin-bottom: 30px;
+          margin-bottom: 25px;
           .num {
-            font-size: 34px;
+            font-size: 28px;
           }
           div {
             .title {
-              font-size: 26px;
+              font-size: 21px;
             }
           }
         }
@@ -169,10 +194,14 @@
     }
     &.sec3 {
       flex-direction: column;
+      padding-top: 60px;
+      overflow-y: hidden !important;
+      height: 100vh;
 
       .left {
         width: 100vw;
         height: 50vh;
+        // height: calc(45vh - 60px);
         img,
         .img {
           // width: 100vw;
@@ -183,11 +212,12 @@
       .right {
         width: 100vw;
         height: 50vh;
-        padding: 20px;
+        // height: calc(50vh - 60px);
+        padding: 0px;
         padding-top: 0px;
         align-items: center;
         justify-content: start;
-        margin-top: 40px;
+        margin-top: 15px;
 
         .title {
           font-size: 36px;

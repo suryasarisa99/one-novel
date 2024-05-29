@@ -27,11 +27,30 @@ export default function TrnasactionsPage() {
         {user?.transactions.map((transaction, index) => {
           return (
             <div className="transaction" key={transaction._id}>
-              <p className="transaction-type">{transaction.transaction_type}</p>
-              <p className={"transaction-type " + transaction.status}>
-                {transaction.status}
-              </p>
-              <p className="transaction-type">{transaction.amount}</p>
+              <div className="top">
+                <p className="transaction-type">
+                  {transaction.transaction_type}
+                </p>
+                <p
+                  className={
+                    "amount " + (transaction.is_debit ? "added" : "deducted")
+                  }
+                >
+                  {transaction.amount}
+                </p>
+              </div>
+              <div className="bottom">
+                <span className={"status " + transaction.status}>
+                  {transaction.status}
+                </span>
+                <div className="date">
+                  {new Date(transaction.date).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "2-digit",
+                  })}
+                </div>
+              </div>
             </div>
           );
         })}

@@ -32,7 +32,6 @@ export default function HomeSection() {
           </div>,
           document.getElementById("overlay")!
         )}
-      <TopBar />
       <motion.p
         initial={{ opacity: 0, y: 150 }}
         transition={{ delay: 0.3, duration: 0.4 }}

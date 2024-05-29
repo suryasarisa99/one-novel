@@ -20,25 +20,25 @@
   --on-error: #8b0000;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-color: #1c1c1c;
-    --primary-color: #232220;
-    --field-bg: #434547e6;
-    --primary-dark: #e8b58a;
-    --on-primary-dark: #1c1c1c;
-    --on-primary: #f5f4f0;
-    --background-color: #323b44;
-    --background-color: #3e3a33;
-    --on-bg-title: #565146;
-    --text-color: #ffffff;
-    --btn: #857248;
-    --on-btn: #dddddd;
-    --input-border: #4b4b4bcc;
-    --error: #440a0a; // Dark red
-    --on-error: #ffcccc; // Light red
-  }
-}
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --primary-color: #1c1c1c;
+//     --primary-color: #232220;
+//     --field-bg: #434547e6;
+//     --primary-dark: #e8b58a;
+//     --on-primary-dark: #1c1c1c;
+//     --on-primary: #f5f4f0;
+//     --background-color: #323b44;
+//     --background-color: #3e3a33;
+//     --on-bg-title: #565146;
+//     --text-color: #ffffff;
+//     --btn: #857248;
+//     --on-btn: #dddddd;
+//     --input-border: #4b4b4bcc;
+//     --error: #440a0a; // Dark red
+//     --on-error: #ffcccc; // Light red
+//   }
+// }
 input {
   width: 100%;
   padding: 14px 26px;
@@ -93,6 +93,14 @@ button.floating-btn {
   }
 }
 
+.horizontal-carousel-outer {
+  position: relative;
+  overflow-y: hidden !important;
+  scrollbar-width: 0px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 .horizontal-carousel {
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -316,15 +324,19 @@ button.floating-btn {
 nav {
   z-index: 3;
   position: absolute;
+  // background-color: red;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px;
+  height: 75px;
   display: flex;
   gap: 20px;
-  padding-top: 20px;
+  // padding-top: 20px;
   // background-color: red;
   padding-left: 50px;
+
+  // background-color: #131313a5;
+  backdrop-filter: blur(10px);
 
   img.logo {
     height: 100px;
@@ -530,8 +542,12 @@ nav {
 @media screen and (max-width: 768px) {
   nav {
     padding-left: 20px;
+    .menu {
+      padding-right: 25px;
+    }
     img.logo {
-      height: 70px;
+      height: 60px;
+      padding-top: 5px;
     }
     .long-elm {
       display: none;

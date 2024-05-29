@@ -38,7 +38,7 @@ export default function DataProvider({
         }
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.log(err.response?.data);
       })
       .finally(() => {
         setLoading(false);

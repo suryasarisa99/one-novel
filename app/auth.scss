@@ -8,40 +8,6 @@
     flex-direction: column;
     // justify-content: center;
 
-    .errors {
-      margin-bottom: 8px;
-    }
-    .errors .error {
-      &:first-of-type {
-        margin-top: 7px;
-      }
-    }
-    .error {
-      background-color: var(--error);
-      border-radius: 6px;
-      padding-left: 10px;
-      padding: 4px 10px;
-      margin-bottom: 4px;
-      color: var(--on-error);
-      font-size: 13px;
-    }
-
-    .pass-input {
-      position: relative;
-      input {
-        padding-right: 50px;
-        margin-bottom: 0;
-      }
-      .icon {
-        color: rgb(176, 176, 176);
-        position: absolute;
-        right: 22px;
-        font-size: 18px;
-        top: calc(50% - 2px);
-        translate: 0% -50%;
-      }
-    }
-
     form {
       width: 65%;
       justify-content: center;
@@ -67,6 +33,28 @@
 
       input {
         margin-bottom: 0;
+      }
+
+      .forgot-password-row {
+        display: flex;
+        justify-content: flex-end;
+      }
+      .forgot-password-btn {
+        background-color: transparent;
+        color: rgb(94, 94, 94);
+        font-size: 13px;
+        padding: 0;
+        padding-top: 20px;
+        padding-right: 8px;
+
+        &:focus,
+        &:hover {
+          // color: transparent;
+          outline: transparent;
+          border-color: transparent;
+          color: rgb(255, 68, 68);
+        }
+        margin: 0;
       }
     }
 
@@ -140,6 +128,78 @@
   }
 }
 
+.auth {
+  .errors {
+    margin-bottom: 8px;
+  }
+  .errors .error {
+    &:first-of-type {
+      margin-top: 7px;
+    }
+  }
+  .error {
+    background-color: var(--error);
+    border-radius: 6px;
+    padding-left: 10px;
+    padding: 4px 10px;
+    margin-bottom: 4px;
+    color: var(--on-error);
+    font-size: 13px;
+  }
+
+  .pass-input {
+    position: relative;
+    input {
+      padding-right: 50px;
+      margin-bottom: 0;
+    }
+    .icon {
+      color: rgb(176, 176, 176);
+      position: absolute;
+      // background-color: red;
+      right: 0px;
+      height: 35px;
+      width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+
+      top: calc(50%);
+      translate: 0% -50%;
+    }
+  }
+}
+
+.reset-password {
+  // display: flex;
+  // background-color: green;
+  // justify-content: center;
+  // align-items: center;
+  // flex-direction: column;
+
+  center {
+    // height: 100%;
+  }
+  form {
+    // width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    // align-items: center;
+    width: 80%;
+    max-width: 600px;
+    height: 100%;
+
+    button {
+      margin-top: 40px;
+    }
+
+    // background-color: red;
+  }
+}
+
 .loader {
   width: 48px;
   height: 48px;
@@ -180,6 +240,14 @@
       img {
         width: 100%;
       }
+    }
+  }
+
+  .reset-password {
+    height: 100vh;
+    form {
+      flex-grow: 0;
+      width: 90%;
     }
   }
 }
@@ -255,10 +323,10 @@
     }
   }
 }
-@media Screen and (prefers-color-scheme: dark) {
-  .otp-box {
-    input.otp {
-      border: 1px solid #585858;
-    }
-  }
-}
+// @media Screen and (prefers-color-scheme: dark) {
+//   .otp-box {
+//     input.otp {
+//       border: 1px solid #585858;
+//     }
+//   }
+// }

@@ -131,8 +131,33 @@ export default function LoginPage() {
       });
   }
 
+  function handleForgotPassword() {
+    if (phoneNumber.length !== 10) {
+      setPopupContent({
+        title: "Invalid Phone Number",
+        content: "Please enter a valid phone number to Reset Forgot Password.",
+        onClick: hidePopup,
+      });
+      showPopup();
+      return;
+    }
+    axios
+      .get(
+        `${process.env.NEXT_PUBLIC_SERVER}/auth/forgot-password/${phoneNumber}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setPopupContent({
+          title: "Password Reset Link Sent",
+          content: `A password reset link has been sent to your ${res.data.mail}. Please check your mail.`,
+          onClick: hidePopup,
+        });
+        showPopup();
+      });
+  }
+
   return (
-    <div className="register split-page">
+    <div className="register split-page auth">
       <div className="cross-bar"></div>
       <div className="left">
         <div className="heading">
@@ -168,6 +193,15 @@ export default function LoginPage() {
             </div>
           </div>
           <div className="errors"></div>
+          <div className="forgot-password-row">
+            <button
+              type="button"
+              className="forgot-password-btn"
+              onClick={handleForgotPassword}
+            >
+              Forgot Password
+            </button>
+          </div>
           <button type="submit">Login</button>
         </motion.form>
         <motion.div

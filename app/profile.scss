@@ -139,16 +139,120 @@
 }
 
 .transactions-page {
+  .transactions {
+    padding: 12px 16px;
+  }
   .transaction {
-    display: flex;
-    gap: 15px;
     padding: 8px 14px;
+    background-color: var(--background-color);
+    margin-bottom: 8px;
+    border-radius: 4px;
 
-    .Success {
-      color: green;
+    .top,
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 10px;
     }
-    .initiated {
-      color: rgb(87, 87, 87);
+
+    .top {
+      font-size: 20px;
+
+      .amount {
+        // background-color: red;
+        &.added {
+          color: green;
+        }
+        &.deducted {
+          color: red;
+        }
+      }
+
+      .Success {
+        color: green;
+      }
+      .initiated {
+        color: rgb(87, 87, 87);
+      }
+    }
+
+    .bottom {
+      font-size: 15px;
+
+      .date {
+        font-size: 14px;
+      }
+
+      .status {
+        &.pending {
+          color: #f0ad4e;
+        }
+        .accepted {
+          color: green;
+        }
+        .rejected {
+          color: red;
+        }
+      }
+    }
+  }
+}
+
+.referal-selector {
+  display: flex;
+  justify-content: space-between;
+  margin: 18px 20px;
+  padding: 10px;
+  border-radius: 12px;
+  gap: 5px;
+  margin-top: 10px;
+  background-color: var(--background-color);
+
+  .referal-lvl {
+    flex-grow: 1;
+    cursor: pointer;
+    // background-color: red;
+    width: 30px;
+    border-radius: 7px;
+    padding-block: 8px;
+    text-align: center;
+  }
+  .selected {
+    background-color: var(--primary-color);
+  }
+}
+
+.referals {
+  padding: 10px 20px;
+
+  .referal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background-color: var(--background-color);
+    margin-bottom: 8px;
+
+    .id {
+      font-size: 13px;
+      color: gray;
+    }
+
+    .status {
+      &.valid {
+        color: green;
+      }
+      &.invalid {
+        color: rgb(255, 46, 46);
+      }
+    }
+
+    .name {
+      font-size: 18px;
+    }
+    .amount {
+      font-size: 18px;
     }
   }
 }

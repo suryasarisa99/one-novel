@@ -29,6 +29,15 @@ export default function ProfilePage() {
     }
   }, []);
 
+  const withdrawlMoney = user?.transactions
+    .filter(
+      (t) => t.transaction_type === "withdrawl" && t.status === "accepted"
+    )
+    .reduce((acc, t) => acc + Math.abs(t.amount), 0);
+  const PendingMoney = user?.transactions
+    .filter((t) => t.transaction_type === "withdrawl" && t.status === "pending")
+    .reduce((acc, t) => acc + Math.abs(t.amount), 0);
+
   if (!user) return null;
   return (
     <div className="profile-page page split-page">
@@ -60,11 +69,11 @@ export default function ProfilePage() {
             </div>
 
             <div className="transactions field">
-              <span className="value">₹ 10000</span>
-              <span className="label">Withrawn</span>
+              <span className="value">₹ {withdrawlMoney}</span>
+              <span className="label">Withdrawl</span>
             </div>
             <div className="transactions field">
-              <span className="value">₹ 5000</span>
+              <span className="value">₹ {PendingMoney}</span>
               <span className="label">Pending</span>
             </div>
             <div className="referals field">
@@ -143,7 +152,10 @@ export default function ProfilePage() {
             </div>
             <div
               className="item-outer"
-              onClick={() => router.push("/withdrawl")}
+              onClick={() => {
+                if (user.withdrawlType == 0) router.push("/withdrawl-details");
+                else router.push("/withdrawl");
+              }}
             >
               <div className="item">
                 <span className="label">Withdrawl</span>
@@ -152,7 +164,9 @@ export default function ProfilePage() {
             </div>
             <div
               className="item-outer"
-              onClick={() => router.push("/withdrawl-details")}
+              onClick={() => {
+                router.push("/withdrawl-details");
+              }}
             >
               <div className="item">
                 <span className="label">Update Withdrawl Details</span>
