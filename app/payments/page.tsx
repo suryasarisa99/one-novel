@@ -20,7 +20,7 @@ export default function PaymentsPage() {
   const { HidePopup, ShowPopup, popupContent, setPopupContent, popupIsOpened } =
     usePopup();
   const upiId = "suryasarisa99-2@okhdfcbank";
-  const { user } = useData();
+  const { user, token } = useData();
   const router = useRouter();
 
   useEffect(() => {
@@ -48,10 +48,17 @@ export default function PaymentsPage() {
     }
 
     axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER}/m-pay/pay`, {
-        id: user._id,
-        utr: utr,
-      })
+      .post(
+        `${process.env.NEXT_PUBLIC_SERVER}/m-pay/pay`,
+        {
+          utr: utr,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         setPopupContent({
           title: "Admin Will Verify Your Payment Soon",
