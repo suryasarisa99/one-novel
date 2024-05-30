@@ -11,6 +11,7 @@ import "./horizontal-carousel.scss";
 
 import DataProvider from "@/context/DataContext";
 const inter = Inter({ subsets: ["latin"] });
+import Providers from "@/context/TopBarProvider";
 
 export const metadata: Metadata = {
   title: "One Novel",
@@ -41,10 +42,12 @@ export default function RootLayout({
         />
       </head>
       <DataProvider>
-        <body className={inter.className}>
-          {children}
-          <div id="overlay" className="hidden"></div>
-        </body>
+        <Providers>
+          <body className={inter.className}>
+            {children}
+            <div id="overlay" className="hidden"></div>
+          </body>
+        </Providers>
       </DataProvider>
     </html>
   );
