@@ -39,7 +39,7 @@ export default function ProductSection() {
         // whileInView={{ opacity: 1 }}
         className="title"
       >
-        ESCAPE INTO THE WORLD OF <span>&apos;JANNU&apos;</span>
+        ESCAPE INTO THE WORLD OF <span>&apos;JAANU&apos;</span>
       </motion.p>
 
       <motion.div

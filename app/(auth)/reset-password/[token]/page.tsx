@@ -93,7 +93,7 @@ export default function ResetPassword() {
           <div className="pass-input">
             <input
               type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
+              placeholder="Enter New password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
@@ -120,7 +120,7 @@ export default function ResetPassword() {
           <div className="pass-input">
             <input
               type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm your password"
+              placeholder="Confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />

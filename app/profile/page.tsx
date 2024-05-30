@@ -14,6 +14,8 @@ export default function ProfilePage() {
   const [isCopied, setIsCopied] = useState(false);
   const router = useRouter();
   const { user, setUser, setToken, setIsLoggedIn } = useData();
+  const [withdrawlMoney, setWithdrawlMoney] = useState(0);
+  const [PendingMoney, setPendingMoney] = useState(0);
 
   useEffect(() => {
     const metaThemeColor = document.querySelector("meta[name=theme-color]");
@@ -29,14 +31,23 @@ export default function ProfilePage() {
     }
   }, []);
 
-  const withdrawlMoney = user?.transactions
-    .filter(
-      (t) => t.transaction_type === "withdrawl" && t.status === "accepted"
-    )
-    .reduce((acc, t) => acc + Math.abs(t.amount), 0);
-  const PendingMoney = user?.transactions
-    .filter((t) => t.transaction_type === "withdrawl" && t.status === "pending")
-    .reduce((acc, t) => acc + Math.abs(t.amount), 0);
+  useEffect(() => {
+    if (!user) return;
+    const w =
+      user?.transactions
+        ?.filter(
+          (t) => t.transaction_type === "withdrawl" && t.status === "accepted"
+        )
+        ?.reduce((acc, t) => acc + Math.abs(t.amount), 0) || 0;
+    const p =
+      user?.transactions
+        ?.filter(
+          (t) => t.transaction_type === "withdrawl" && t.status === "pending"
+        )
+        ?.reduce((acc, t) => acc + Math.abs(t.amount), 0) || 0;
+    setWithdrawlMoney(w);
+    setPendingMoney(p);
+  }, [user]);
 
   if (!user) return null;
   return (
@@ -105,7 +116,7 @@ export default function ProfilePage() {
                 whileTap={{ scale: 0.7 }}
                 onClick={() => {
                   navigator?.clipboard?.writeText(
-                    `https://one-novel.vercel.app/register?ref=${user._id}`
+                    `https://one-novel.vercell.app/register?ref=${user._id}`
                   );
                   setIsCopied(true);
                   setTimeout(() => {

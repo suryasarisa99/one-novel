@@ -100,7 +100,7 @@ export default function Home() {
       setTimeout(() => {
         if (hcarouselRef.current)
           hcarouselRef.current.scrollTo({ left: 0, behavior: "instant" });
-      }, 2000);
+      }, 300);
       console.log(timeoutRef.current);
     }
   }

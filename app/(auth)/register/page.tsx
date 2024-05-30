@@ -269,7 +269,7 @@ function Register() {
           <div className="pass-input">
             <input
               type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
+              placeholder="Enter Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
@@ -296,7 +296,7 @@ function Register() {
           <div className="pass-input">
             <input
               type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm your password"
+              placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
