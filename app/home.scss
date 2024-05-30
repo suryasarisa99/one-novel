@@ -97,6 +97,39 @@ button.floating-btn {
   position: relative;
   overflow-y: hidden !important;
   scrollbar-width: 0px;
+  .left-arrow,
+  .right-arrow {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 12px 12px;
+    opacity: 0;
+    transform: all 0.3s ease-in-out;
+
+    &:hover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(167, 167, 167, 0.242);
+      backdrop-filter: blur(2px);
+      border-radius: 4px;
+      color: rgb(0, 0, 0);
+    }
+  }
+  .left-arrow {
+    left: 8px;
+  }
+  .right-arrow {
+    right: 8px;
+  }
+  &:hover {
+    .left-arrow,
+    .right-arrow {
+      opacity: 1;
+    }
+  }
   &::-webkit-scrollbar {
     display: none;
   }

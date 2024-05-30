@@ -11,26 +11,43 @@
 
   &.sec1 {
     .content {
-      margin-top: 80px;
+      padding-top: 80px;
       display: flex;
-      .writer-img {
+      align-items: center;
+
+      .writer-img-outer {
         width: 50vw;
-        height: 100%;
+        height: calc(100vh - 80px);
+        padding: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .writer-img {
+        width: 95%;
+        height: 92%;
         object-fit: cover;
         flex-shrink: 0;
         border-radius: 20px;
       }
       .right {
         flex-shrink: 0;
+        flex-grow: 1;
+
         width: 50vw;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        // background-color: red;
         font-size: 78px;
         text-align: center;
         font-weight: 900;
         letter-spacing: 2px;
+
+        .title {
+          max-width: 60%;
+        }
       }
     }
   }
@@ -89,23 +106,25 @@
   }
   &.sec3 {
     display: flex;
+    padding-top: 75px;
     .left,
     .right {
-      width: 50vw;
-      height: 100vh;
+      height: calc(100vh - 75px);
       flex-shrink: 0;
     }
     .left {
-      padding: 25px;
+      padding: 35px;
+      width: 55vw;
       img,
       .img {
         object-fit: cover;
-        width: 100%;
-        height: 48vw;
+        width: 95%;
+        height: 95%;
         border-radius: 20px;
       }
     }
     .right {
+      width: 45vw;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -135,19 +154,32 @@
       .content {
         flex-direction: column;
         align-items: center;
-        margin-top: 75px;
         overflow-y: hidden !important;
         height: 100vh;
+        padding-top: 75px;
+
+        // background-color: green;
+        .writer-img-outer {
+          height: calc(55vh - 75px);
+          width: 100vw;
+          padding: 0px;
+        }
 
         .writer-img {
-          height: 45vh;
+          height: 95%;
           width: 90vw;
         }
         .right {
-          height: 40vh;
+          height: 45vh;
           width: 100vw;
           word-spacing: 16px;
           font-size: 36px;
+          padding-top: 55px;
+          align-items: start;
+          // background-color: red;
+          .title {
+            max-width: 75%;
+          }
         }
       }
     }
@@ -204,6 +236,7 @@
       .left {
         width: 100vw;
         height: 50vh;
+        padding: 20px;
         // height: calc(45vh - 60px);
         img,
         .img {

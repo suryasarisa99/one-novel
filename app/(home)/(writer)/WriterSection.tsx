@@ -6,7 +6,7 @@ export default function WriterSection1() {
   return (
     <div className="horizontal-section sec1">
       <div className="content">
-        <div className="writer-img">
+        <div className="writer-img-outer">
           <motion.img
             // initial={{ y: 150, scale: 0.6, opacity: 0 }}
             // whileInView={{ y: 0, scale: 1, opacity: 1 }}
@@ -24,14 +24,16 @@ export default function WriterSection1() {
             width={200}
           /> */}
         </div>
-        <motion.span
-          initial={{ y: 200, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          // transition={{ duration: 0.4 }}
-          className="right"
-        >
-          Writer&apos;s Benfit Program
-        </motion.span>
+        <div className="right">
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
+            className="title"
+          >
+            Writer&apos;s Benfit Program
+          </motion.div>
+        </div>
       </div>
     </div>
   );
