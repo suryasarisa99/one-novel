@@ -233,6 +233,10 @@
       overflow-y: hidden !important;
       height: 100vh;
 
+      .hidden-input {
+        display: none;
+      }
+
       .left {
         width: 100vw;
         height: 50vh;

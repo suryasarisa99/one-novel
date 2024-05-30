@@ -12,6 +12,8 @@ export type UserType = {
   balance: number;
   verified: boolean;
   parents: string[];
+  uploadUrl: string;
+  uploadStatus: string;
   transactions: {
     _id: string;
     transaction_id: string;

@@ -125,6 +125,7 @@ export default function Home() {
 
   function handlehScrollToKnowFirstPage() {
     if (!hcarouselRef.current) return;
+    clearTimeout(timeoutRef.current as number);
     if (hcarouselRef.current.scrollLeft == 0) {
       setIsFirstPage(true);
     } else {
@@ -133,7 +134,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    setTimeout(() => {
+    timeoutRef.current = window.setTimeout(() => {
       hcarouselRef.current?.scrollBy({ left: 300, behavior: "smooth" });
     }, 2800);
 
