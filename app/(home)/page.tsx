@@ -267,7 +267,7 @@ export default function Home() {
         >
           <HomeSection stopAutoScroll={stopAutoScroll} />
           <WriterSection1 />
-          {!isLoggedIn && (
+          {isLoggedIn && (
             <>
               <WriterSection2 />
               <WriterSection3 />
