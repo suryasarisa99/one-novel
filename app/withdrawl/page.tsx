@@ -14,6 +14,11 @@ export default function WithdrawlPage() {
   const [showWithdrawlOptions, setShowWithdrawlOptions] = useState(false);
   const { user, setUser, token } = useData();
   const [choosenWithdrawlType, setChoosenWithdrawlType] = useState(1);
+  const defaultCancel = {
+    text: "",
+    event: () => {},
+  };
+  const [cancel, setCancel] = useState(defaultCancel);
 
   useEffect(() => {
     if (!user) return;
@@ -32,6 +37,7 @@ export default function WithdrawlPage() {
         onClick: HidePopup,
         btnText: "Ok",
       });
+      setCancel(defaultCancel);
       ShowPopup();
       return;
     } else {
@@ -48,6 +54,10 @@ export default function WithdrawlPage() {
             HidePopup();
           },
           btnText: "Yes",
+        });
+        setCancel({
+          text: "Cancel",
+          event: HidePopup,
         });
         ShowPopup();
       }
@@ -77,6 +87,7 @@ export default function WithdrawlPage() {
           onClick: HidePopup,
           btnText: "Ok",
         });
+        setCancel(defaultCancel);
         ShowPopup();
         setUser({ ...user, balance: user.balance - balance });
       })
@@ -100,6 +111,8 @@ export default function WithdrawlPage() {
             content={popupContent.content}
             onClick={popupContent.onClick}
             btnText={popupContent.btnText}
+            cancelText={cancel.text}
+            onCancel={cancel.event}
           />,
           document.getElementById("overlay")!
         )}

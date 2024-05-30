@@ -6,6 +6,7 @@ import useData from "@/hooks/useData";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Page3() {
   const router = useRouter();
@@ -63,12 +64,9 @@ export default function Page3() {
           you the Freedom to Succed
         </div>
         {!isLoggedIn && (
-          <button
-            className="floating-btn"
-            onClick={() => router.push("/register")}
-          >
+          <Link href="/register" className="btn floating-btn">
             JOIN NOW
-          </button>
+          </Link>
         )}
       </div>
     </div>

@@ -5,29 +5,17 @@ import useData from "@/hooks/useData";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+
 export default function ProductSection() {
   const router = useRouter();
   const { isLoggedIn, user } = useData();
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  function handleBuy() {
-    if (!isLoggedIn || !user) {
-      router.push("/register");
-      return;
-    }
-    if (user.products.length > 0) return;
-
-    router.push("/payments");
-
-    // axios
-    //   .post(`${process.env.NEXT_PUBLIC_SERVER}/payment/pay`, {
-    //     _id: user._id,
-    //   })
-    //   .then((res) => {
-    //     // open(res.data.url, "_blank");
-    //     open(res.data.url);
-    //   });
-  }
+  var link = "/pdf";
+  if (!isLoggedIn || !user) link = "/register";
+  else if (user.products.length == 0) link = "/payments";
+  else link = "/pdf";
 
   return (
     <div className="product-page home-page-section page" id="product">
@@ -63,27 +51,16 @@ export default function ProductSection() {
           }}
         />
       </motion.div>
-      {!user || user.products.length == 0 ? (
-        <motion.button
-          initial={{ opacity: 0, y: 100 }}
-          transition={{ delay: 0.3, duration: 0.3 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="floating-btn"
-          onClick={handleBuy}
-        >
-          Buy Now
-        </motion.button>
-      ) : (
-        <motion.button
-          initial={{ opacity: 0, y: 100 }}
-          transition={{ delay: 0.3, duration: 0.3 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="floating-btn"
-          onClick={() => router.push("/pdf")}
-        >
-          View Book
-        </motion.button>
-      )}
+
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        transition={{ delay: 0.3, duration: 0.3 }}
+        whileInView={{ opacity: 1, y: 0 }}
+      >
+        <Link href={link} className="btn buy-btn floating-btn">
+          {!user || user.products.length == 0 ? "Buy Now" : "Read Now"}
+        </Link>
+      </motion.div>
     </div>
   );
 }

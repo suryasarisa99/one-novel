@@ -7,6 +7,7 @@ import TopBar from "./TopBar";
 import { useRouter } from "next/navigation";
 import useData from "@/hooks/useData";
 import Image from "next/image";
+import Link from "next/link";
 import { createPortal } from "react-dom";
 export default function HomeSection({
   stopAutoScroll,
@@ -31,18 +32,9 @@ export default function HomeSection({
 
       <Image className="main-img" src={img1} alt="home page" priority={true} />
       {!isLoggedIn && (
-        <motion.button
-          initial={{ opacity: 0, y: 300 }}
-          transition={{ delay: 0.4, duration: 0.3 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="floating-btn"
-          onClick={() => {
-            stopAutoScroll();
-            router.push("/register");
-          }}
-        >
+        <Link href="/register" className="btn floating-btn">
           JOIN NOW
-        </motion.button>
+        </Link>
       )}
     </div>
   );

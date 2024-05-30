@@ -5,6 +5,8 @@ type PopupBoxProps = {
   content?: string;
   title: string;
   btnText?: string;
+  cancelText?: string;
+  onCancel?: () => void;
   onClick: () => void;
 };
 
@@ -13,6 +15,8 @@ export default function PopupBox({
   content,
   title,
   btnText = "OK",
+  cancelText,
+  onCancel = () => {},
   onClick,
 }: PopupBoxProps) {
   return (
@@ -25,7 +29,13 @@ export default function PopupBox({
         <p>{title}</p>
       </div>
       <div className="text">{content}</div>
+
       <div className="buttons">
+        {cancelText && (
+          <button className="cancel-btn" onClick={onCancel}>
+            {cancelText}
+          </button>
+        )}
         <button onClick={onClick}>{btnText}</button>
       </div>
     </motion.div>

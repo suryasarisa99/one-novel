@@ -229,10 +229,10 @@ function Register() {
     <div className="register auth split-page">
       <div className="cross-bar"></div>
       <div className="left">
-        <div className="heading">
+        <Link className="heading" href="/">
           <Image src={logo} alt="logo" />
           <p className="title">One Novel</p>
-        </div>
+        </Link>
 
         <motion.form
           initial={{ opacity: 0, y: 100 }}
@@ -349,7 +349,9 @@ function Register() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Link href="/login">Already Have An Account ? Login</Link>
+          <Link className="gray-link" href="/login">
+            Already Have An Account ? Login
+          </Link>
         </motion.div>
       </div>
       {popupIsOpened &&

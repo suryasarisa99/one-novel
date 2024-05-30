@@ -9,6 +9,7 @@ import { LuClipboard } from "react-icons/lu";
 import { LuClipboardCheck } from "react-icons/lu";
 import useData from "@/hooks/useData";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ProfilePage() {
   const [isCopied, setIsCopied] = useState(false);
@@ -136,54 +137,41 @@ export default function ProfilePage() {
             transition={{ duration: 0.5 }}
             className="section"
           >
-            <div
-              className="item-outer"
-              onClick={() => router.push("/transactions")}
-            >
+            <Link href="/transactions" className="item-outer">
               <div className="item">
                 <span className="label">Transactions</span>
                 <FaChevronRight />
               </div>
-            </div>
-            {/* <div className="item-outer" onClick={() => router.push("/parents")}>
+            </Link>
+            {/* <Link className="item-outer" href="/parents">
               <div className="item">
                 <span className="label">Parents</span>
                 <FaChevronRight />
               </div>
-            </div> */}
-
-            <div
-              className="item-outer"
-              onClick={() => router.push("/referals")}
-            >
+            </Link> */}
+            <Link href="/referals" className="item-outer">
               <div className="item">
                 <span className="label">Referals</span>
                 <FaChevronRight />
               </div>
-            </div>
-            <div
+            </Link>
+            <Link
+              href={
+                user.withdrawlType === 0 ? "/withdrawl-details" : "/withdrawl"
+              }
               className="item-outer"
-              onClick={() => {
-                if (user.withdrawlType == 0) router.push("/withdrawl-details");
-                else router.push("/withdrawl");
-              }}
             >
               <div className="item">
                 <span className="label">Withdrawl</span>
                 <FaChevronRight />
               </div>
-            </div>
-            <div
-              className="item-outer"
-              onClick={() => {
-                router.push("/withdrawl-details");
-              }}
-            >
+            </Link>
+            <Link href={"/withdrawl-details"} className="item-outer">
               <div className="item">
-                <span className="label">Update Withdrawl Details</span>
+                <span className="label">Withdrawl Details</span>
                 <FaChevronRight />
               </div>
-            </div>
+            </Link>
             <div
               className="item-outer"
               onClick={() => {

@@ -160,10 +160,11 @@ export default function LoginPage() {
     <div className="register split-page auth">
       <div className="cross-bar"></div>
       <div className="left">
-        <div className="heading">
+        <Link className="heading" href="/">
           <Image src={logo} alt="logo img" />
           <p className="title">One Novel</p>
-        </div>
+        </Link>
+
         <motion.form
           onSubmit={handleFormSubmit}
           action=""
@@ -210,7 +211,9 @@ export default function LoginPage() {
           transition={{ duration: 0.5 }}
           className="link"
         >
-          <Link href="/register">Create Account ? Signup</Link>
+          <Link className="gray-link" href="/register">
+            Create Account ? Signup
+          </Link>
         </motion.div>
       </div>
       {popup &&

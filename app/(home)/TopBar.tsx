@@ -31,11 +31,18 @@ export default function TopBar({
       <Image src={logo} className="logo" alt="" />
       <ul className="menu">
         <li>
-          {/* <Link href="/profile" className="link">
-            <FaRegUser className="outline" size={22} />
-            <FaUser className="fill" size={22} />
-          </Link> */}
-          <span
+          {user ? (
+            <Link href="/profile" className="link">
+              <FaRegUser className="outline" size={22} />
+              <FaUser className="fill" size={22} />
+            </Link>
+          ) : (
+            <Link href="/login" className="link">
+              <FaRegUser className="outline" size={22} />
+              <FaUser className="fill" size={22} />
+            </Link>
+          )}
+          {/* <span
             onClick={() => {
               stopAutoScroll();
               if (!user) return router.push("/login");
@@ -44,7 +51,7 @@ export default function TopBar({
           >
             <FaRegUser className="outline" size={22} />
             <FaUser className="fill" size={22} />
-          </span>
+          </span> */}
         </li>
 
         <li className="wallet">
@@ -55,7 +62,7 @@ export default function TopBar({
               Balance:
               <span className="amount">₹ {user?.balance || 0} </span>
             </p>
-            <button
+            {/* <button
               className="withdrawl-btn"
               onClick={() => {
                 stopAutoScroll();
@@ -65,7 +72,19 @@ export default function TopBar({
               }}
             >
               With Drawl
-            </button>
+            </button> */}
+            <Link
+              href={
+                !user
+                  ? "/login"
+                  : user.withdrawlType === 0
+                  ? "/withdrawl-details"
+                  : "/withdrawl"
+              }
+              className="btn withdrawl-btn"
+            >
+              With Drawl
+            </Link>
           </div>
         </li>
         <li className="long-elm">

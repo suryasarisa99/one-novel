@@ -11,7 +11,7 @@ import "./horizontal-carousel.scss";
 
 import DataProvider from "@/context/DataContext";
 const inter = Inter({ subsets: ["latin"] });
-import Providers from "@/context/TopBarProvider";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   title: "One Novel",
@@ -42,12 +42,11 @@ export default function RootLayout({
         />
       </head>
       <DataProvider>
-        <Providers>
-          <body className={inter.className}>
-            {children}
-            <div id="overlay" className="hidden"></div>
-          </body>
-        </Providers>
+        <body className={inter.className}>
+          <NextTopLoader color="#efd697" showSpinner={false} />
+          {children}
+          <div id="overlay" className="hidden"></div>
+        </body>
       </DataProvider>
     </html>
   );

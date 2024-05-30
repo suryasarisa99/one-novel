@@ -57,11 +57,13 @@ body {
     display: none;
   }
 }
-button.floating-btn {
+.floating-btn {
   width: 150px;
   background-color: var(--primary-color);
   border-radius: 8px;
   color: var(--on-primary);
+  display: inline-block;
+  text-align: center;
   animation: float 2s ease-in-out infinite;
   &:hover {
     background-color: var(--on-primary);
@@ -112,8 +114,8 @@ button.floating-btn {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: rgba(167, 167, 167, 0.242);
-      backdrop-filter: blur(2px);
+      background-color: rgba(167, 167, 167, 0.319);
+      backdrop-filter: blur(5px);
       border-radius: 4px;
       color: rgb(0, 0, 0);
     }
@@ -194,14 +196,16 @@ button.floating-btn {
     font-family: "Source Serif 4", serif;
     font-weight: 500;
   }
-  button {
+  .btn {
     position: absolute;
     bottom: 15%;
     font-size: 20px;
     width: 200px;
     background-color: #e6f4fc;
-    // background-color: #cbd7de;
     left: 26%;
+    &:hover {
+      background-color: #000000;
+    }
   }
 }
 
@@ -249,10 +253,11 @@ button.floating-btn {
   }
   .desc {
   }
-  button {
+  .buy-btn {
     margin-top: 40px;
-    background-color: var(--primary-dark);
+    background-color: var(--primary-dark) !important;
     color: var(--on-primary-dark);
+    padding: 7px;
   }
 }
 
@@ -356,6 +361,7 @@ button.floating-btn {
 
 nav {
   z-index: 3;
+  user-select: none;
   position: absolute;
   // background-color: red;
   top: 0;
@@ -419,11 +425,12 @@ nav {
           padding-left: 20px;
         }
 
-        button.withdrawl-btn {
+        .withdrawl-btn {
           position: static;
           background-color: var(--btn);
           width: 80%;
           color: var(--on-btn);
+          text-align: center;
           font-size: 14px;
           margin-top: 14px;
           border-radius: 2px;
@@ -447,7 +454,7 @@ nav {
         }
       }
 
-      a {
+      .link {
         color: var(--on-primary);
         font-size: 19px;
         padding: 8px 14px !important;
@@ -586,23 +593,25 @@ nav {
       display: none;
     }
     li {
-      a {
+      .ink {
         font-size: 18px;
       }
     }
   }
-  .home-page {
-    nav {
-      .menu {
-        padding-right: 16px;
-        gap: 0px;
-      }
-      .wallet-box {
-        right: 0px !important;
-      }
-      li {
-      }
+
+  nav {
+    .menu {
+      padding-right: 16px;
+      gap: 0px;
     }
+    .wallet-box {
+      right: 0px !important;
+    }
+    li {
+    }
+  }
+
+  .home-page {
     img.main-img {
       // display: none;
       left: 0px;
@@ -814,8 +823,7 @@ nav {
   nav {
     .menu {
       li {
-        color: black;
-        a {
+        .link {
           color: black;
           &::before {
             background-color: black;
