@@ -274,6 +274,9 @@
         height: 50vh;
         padding: 20px;
         // height: calc(45vh - 60px);
+        display: flex;
+        justify-content: center;
+
         img,
         .img {
           // width: 100vw;

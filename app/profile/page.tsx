@@ -51,7 +51,9 @@ export default function ProfilePage() {
           ?.reduce((acc, t) => acc + Math.abs(t?.amount), 0) || 0;
       setWithdrawlMoney(w);
       setPendingMoney(p);
-    } catch (err) {}
+    } catch (err) {
+      console.log("error in profile page", err);
+    }
   }, [user]);
 
   if (!user) return null;
@@ -129,7 +131,7 @@ export default function ProfilePage() {
                 whileTap={{ scale: 0.7 }}
                 onClick={() => {
                   navigator?.clipboard?.writeText(
-                    `https://wwww.onenovel.in/register?ref=${user._id}`
+                    `https://www.onenovel.in/register?ref=${user._id}`
                   );
                   setIsCopied(true);
                   setTimeout(() => {
