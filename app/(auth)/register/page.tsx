@@ -172,10 +172,10 @@ function Register() {
         setPopupContent({
           title: "Successfully Registered",
           content:
-            "User Registeration is  Successfull. Please Login to Continue.",
+            "User Registeration is  Successfull. Please Verify  OTP to Continue.",
           onClick: () => {
             HidePopup();
-            router.push("/login");
+            router.push("/verification");
           },
           btnText: "Login Now",
         });
@@ -338,7 +338,6 @@ function Register() {
             placeholder="Answer to Security Question"
           />
           <div className="errors"></div> */}
-
           <button type="submit">
             {loading ? <div className="loader"></div> : "Register"}
           </button>

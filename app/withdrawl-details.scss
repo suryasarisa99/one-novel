@@ -119,17 +119,22 @@
 
 .payment-page {
   display: flex;
-  // overflow-y: auto;
+  align-items: stretch !important;
 
   .left {
-    // width: 55%;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    input {
+      z-index: 2;
+    }
+    button {
+      margin-bottom: 25px;
+    }
   }
   .right {
     width: 45%;
-    background-color: var(--background-color);
     display: flex;
     justify-content: center;
     align-items: center;

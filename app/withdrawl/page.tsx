@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import useData from "@/hooks/useData";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { FaChevronLeft } from "react-icons/fa";
+import Link from "next/link";
 
 export default function WithdrawlPage() {
   const { HidePopup, ShowPopup, setPopupContent, popupContent, popupIsOpened } =
@@ -83,7 +85,7 @@ export default function WithdrawlPage() {
         console.log(res);
         setPopupContent({
           title: "Withdrawl Request Sent",
-          content: `Wait for the admin to approve the request. You will get the amount in your account soon.`,
+          content: `Wait for the admin to approve the request. You will get the amount in your wallet soon.`,
           onClick: HidePopup,
           btnText: "Ok",
         });
@@ -159,7 +161,17 @@ export default function WithdrawlPage() {
                 </span>
               </label>
             </div>
-            <center>
+            <div className="btns">
+              <button
+                className="cancel-btn"
+                onClick={() => {
+                  setShowWithdrawlOptions(false);
+                  document.getElementById("overlay")!.className = "hidden";
+                  document.documentElement.style.overflow = "auto";
+                }}
+              >
+                Cacnel
+              </button>
               <button
                 onClick={() => {
                   if (!user) return;
@@ -171,12 +183,19 @@ export default function WithdrawlPage() {
               >
                 Confirm Withdrawl
               </button>
-            </center>
+            </div>
           </div>,
           document.getElementById("overlay")!
         )}
 
-      <h1>Withdrawl Money</h1>
+      <div className="heading-with-arrow">
+        <Link href="/">
+          <div className="icon">
+            <FaChevronLeft />
+          </div>
+        </Link>
+        <h1>Withdrawl Money</h1>
+      </div>
 
       <form onSubmit={handleSubmit}>
         <input

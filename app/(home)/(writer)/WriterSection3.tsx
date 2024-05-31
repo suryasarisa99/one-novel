@@ -35,7 +35,7 @@ export default function WriterSection3() {
     // Your code here
   };
   return (
-    <div className="horizontal-section sec3 ">
+    <div className="horizontal-section sec3 " id="w3">
       <div className="left">
         <motion.img
           initial={{ y: 200, opacity: 0 }}

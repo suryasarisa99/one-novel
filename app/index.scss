@@ -27,7 +27,6 @@ a {
 body {
   margin: 0;
   min-width: 320px;
-  min-height: 100vh;
   color: var(--text-color);
 }
 
@@ -40,7 +39,7 @@ button,
 .btn {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 7px 1.2em !important;
+  padding: 8px 1.2em !important;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -87,18 +86,16 @@ button,
   }
 }
 .split-page {
-  .left,
   .right {
     min-height: 100vh;
   }
 }
+
 .split-page,
 .split-page-mb {
   min-height: 100vh;
-  // height: 100vh;
-  // height: 100%;
   display: flex;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   background-color: var(--primary-color);
 
@@ -116,14 +113,34 @@ button,
   }
 
   .cross-bar {
-    position: absolute;
+    position: fixed;
     left: calc(55% - 80px);
     top: -20px;
-    height: 120%;
+    bottom: -45px;
     width: 170px;
     rotate: 0deg;
+    z-index: 1;
     animation: cross-bar-rotate 5s infinite ease-in-out;
     background-color: var(--primary-color);
+  }
+}
+
+.heading-with-arrow {
+  margin-bottom: 24px;
+  position: relative;
+  align-self: stretch;
+  h1 {
+    text-align: center;
+    font-size: 32px;
+  }
+  .icon {
+    font-size: 24px;
+    left: 0px;
+    top: -2.5px;
+    border-radius: 8px;
+    padding: 4px 15px;
+    position: absolute;
+    z-index: 3;
   }
 }
 
@@ -208,4 +225,53 @@ html {
   50% {
     transform: rotate(4deg);
   }
+}
+
+.new-split-page {
+  background-color: red !important;
+  // position: relative;
+  display: flex;
+  min-height: 100vh;
+  height: fit-content;
+  .new-left {
+    background-color: green !important;
+    width: 50vw;
+  }
+  .new-right {
+    background-color: blue !important;
+  }
+
+  .new-cross-bar-container {
+    position: absolute;
+    position: fixed;
+    left: calc(55% - 80px);
+    top: -20px;
+    bottom: -20px;
+    width: 170px;
+    z-index: 5;
+    background-color: yellow;
+    rotate: 0deg;
+    animation: cross-bar-rotate 5s infinite ease-in-out;
+  }
+  // .new-cross-bar-container {
+  //   position: fixed;
+  //   top: 0;
+  //   bottom: 0;
+  //   left: 40%;
+  //   width: 300px;
+  //   background-color: rgb(192, 255, 129);
+  //   overflow-y: hidden;
+  //   z-index: 4;
+  //   .new-cross-bar {
+  //     width: 100px;
+  //     background-color: yellow;
+  //     rotate: 8deg;
+  //     position: absolute;
+  //     top: 0;
+  //     bottom: 0;
+  //     left: 35%;
+  //     min-height: initial;
+  //     scale: 110%;
+  //   }
+  // }
 }

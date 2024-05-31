@@ -47,7 +47,48 @@ export default function Home() {
   const { isLoggedIn } = useData();
   const [writersPopup, setWriterPopup] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [currentPageNo, setCurrentPage] = useState(0);
+  const [isFirstPage, setIsFirstPage] = useState(true);
+
+  function showWriterPopup() {
+    setWriterPopup(true);
+    document.getElementById("overlay")!.className = "";
+    document.documentElement.style.overflow = "auto";
+  }
+
+  function hideWriterPopup() {
+    setWriterPopup(false);
+    document.getElementById("overlay")!.className = "hidden";
+    document.documentElement.style.overflow = "hidden";
+  }
+
+  const autoScroll = useCallback(() => {
+    if (!hcarouselRef.current || isHovered) {
+      console.log("Auto Scrolled stoped: due to Hovered");
+      return;
+    } else {
+      console.log("Auto Scrolled Started: ", isHovered);
+    }
+
+    const { scrollLeft, scrollWidth, clientWidth } = hcarouselRef.current;
+
+    if (scrollWidth - (scrollLeft + clientWidth) < 20) {
+      hcarouselRef.current.scrollTo({ left: 0, behavior: "instant" });
+    } else hcarouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
+
+    timeoutRef.current = window.setTimeout(autoScroll, 2200);
+  }, [isHovered]);
+
+  // delay and start auto scroll
+  function handleHorizontalScroll() {
+    if (scrollTimeoutRef.current !== null) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+    clearTimeout(timeoutRef.current as number);
+    scrollTimeoutRef.current = window.setTimeout(() => {
+      autoScroll();
+    }, 2500);
+    // Wait for 2 seconds before auto scrolling again
+  }
 
   function stopAutoScroll() {
     clearTimeout(timeoutRef.current as number);
@@ -55,32 +96,40 @@ export default function Home() {
   }
 
   function handleVerticalScroll(e: Event) {
-    if (!vcarouselRef.current) return;
-    stopAutoScroll();
+    // if at top page: start auto scroll and clear previous timeout
+    // else at other page: stop auto scroll and scroll to first page ( after small delay )
 
-    // if (vcarouselRef.current.scrollTop < 10) {
-    //  //first vertical page
-    // } else {
-    //  //other vertical pages
-    // }
+    if (!vcarouselRef.current) return;
+    if (vcarouselRef.current.scrollTop < 10) {
+      console.log("Scroll Started: go to First vertical section");
+      // clearTimeout(timeoutRef.current as number);
+      // timeoutRef.current = window.setTimeout(() => {
+      //   autoScroll();
+      // }, 2000);
+    } else {
+      console.log("Scroll Stoped: go to other vertical section");
+      stopAutoScroll();
+      setTimeout(() => {
+        if (hcarouselRef.current)
+          hcarouselRef.current.scrollTo({ left: 0, behavior: "instant" });
+      }, 300);
+      console.log(timeoutRef.current);
+    }
   }
+
+  useEffect(() => {
+    // setTimeout(() => {
+    //   autoScroll();
+    // }, 2800);
+  }, [autoScroll]);
 
   function handlehScrollToKnowFirstPage() {
     if (!hcarouselRef.current) return;
     clearTimeout(timeoutRef.current as number);
     if (hcarouselRef.current.scrollLeft == 0) {
-      setCurrentPage(0);
+      setIsFirstPage(true);
     } else {
-      ["w1", "w2", "w3"].forEach((id, index) => {
-        const page = document.getElementById(id);
-        if (page) {
-          const rect = page.getBoundingClientRect();
-          if (rect.left < 10) {
-            setCurrentPage(index + 1);
-            console.log("page found", index + 1);
-          }
-        }
-      });
+      setIsFirstPage(false);
     }
   }
 
@@ -89,8 +138,13 @@ export default function Home() {
       hcarouselRef.current?.scrollBy({ left: 300, behavior: "smooth" });
     }, 2800);
 
+    // setTimeout(() => {
+    //   hideWriterPopup();
+    // }, 2000);
+    // showWriterPopup();
+
     // hcarouselRef.current?.addEventListener("scroll", handleHorizontalScroll);
-    vcarouselRef.current?.addEventListener("scroll", handleVerticalScroll);
+    // vcarouselRef.current?.addEventListener("scroll", handleVerticalScroll);
     hcarouselRef.current?.addEventListener(
       "scroll",
       handlehScrollToKnowFirstPage
@@ -111,7 +165,11 @@ export default function Home() {
     }
 
     return () => {
-      vcarouselRef.current?.removeEventListener("scroll", handleVerticalScroll);
+      // hcarouselRef.current?.removeEventListener(
+      //   "scroll",
+      //   handleHorizontalScroll
+      // );
+      // vcarouselRef.current?.removeEventListener("scroll", handleVerticalScroll);
       hcarouselRef.current?.removeEventListener(
         "scroll",
         handlehScrollToKnowFirstPage
@@ -127,6 +185,11 @@ export default function Home() {
     if (!hcarouselRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = hcarouselRef.current;
 
+    // to prevent automatically scroll when arrow clicked
+    // timeoutRef.current = window.setTimeout(() => {
+    //   stopAutoScroll();
+    // }, 300);
+
     if (scrollWidth - (scrollLeft + clientWidth) < 20) {
       hcarouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
     } else {
@@ -137,6 +200,11 @@ export default function Home() {
   function handlePrvButton() {
     if (!hcarouselRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = hcarouselRef.current;
+
+    // to prevent automatically scroll when arrow clicked
+    // timeoutRef.current = window.setTimeout(() => {
+    //   stopAutoScroll();
+    // }, 300);
 
     if (scrollLeft == 0) {
       hcarouselRef.current.scrollBy({ left: 0, behavior: "smooth" });
@@ -157,28 +225,27 @@ export default function Home() {
   function handleMouseLeave() {
     setIsHovered(false);
     console.log("Mouse Leave");
+    timeoutRef.current = window.setTimeout(() => {
+      autoScroll();
+    }, 1000);
   }
 
   return (
     <div className="home" ref={vcarouselRef}>
-      <div className="right-arrow"></div>
+      {/* <HomeSection /> */}
+      {/* <HorizontalCarousel /> */}
 
-      <div className="horizontal-carousel-outer home-page-section">
-        <div className="page-indicator">
-          <div className="page-indicator-inner">
-            {[0, 1, 2, 3].map((i) => {
-              return (
-                <div
-                  key={i}
-                  className={`page-indicator-item ${
-                    i == currentPageNo ? "active" : ""
-                  }`}
-                ></div>
-              );
-            })}
-          </div>
-        </div>
-        {currentPageNo !== 0 && (
+      <div className="right-arrow"></div>
+      <div
+        className="horizontal-carousel-outer home-page-section"
+        // onMouseEnter={handleMouseEnter}
+        // onMouseLeave={handleMouseLeave}
+        // onMouseMove={handleMouseEnter}
+        // onTouchStart={handleMouseEnter}
+        // onTouchEnd={handleMouseLeave}
+        // onTouchMove={handleMouseEnter}
+      >
+        {!isFirstPage && (
           <div
             className="left-arrow"
             onClick={handlePrvButton}

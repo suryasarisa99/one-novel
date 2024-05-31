@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import { LuClipboard } from "react-icons/lu";
 import { LuClipboardCheck } from "react-icons/lu";
@@ -33,21 +33,25 @@ export default function ProfilePage() {
   }, []);
 
   useEffect(() => {
-    if (!user) return;
-    const w =
-      user?.transactions
-        ?.filter(
-          (t) => t.transaction_type === "withdrawl" && t.status === "accepted"
-        )
-        ?.reduce((acc, t) => acc + Math.abs(t.amount), 0) || 0;
-    const p =
-      user?.transactions
-        ?.filter(
-          (t) => t.transaction_type === "withdrawl" && t.status === "pending"
-        )
-        ?.reduce((acc, t) => acc + Math.abs(t.amount), 0) || 0;
-    setWithdrawlMoney(w);
-    setPendingMoney(p);
+    if (!user || !user.transactions) return;
+    try {
+      const w =
+        user?.transactions
+          ?.filter(
+            (t) =>
+              t?.transaction_type === "withdrawl" && t?.status === "accepted"
+          )
+          ?.reduce((acc, t) => acc + Math.abs(t?.amount), 0) || 0;
+      const p =
+        user?.transactions
+          ?.filter(
+            (t) =>
+              t?.transaction_type === "withdrawl" && t?.status === "pending"
+          )
+          ?.reduce((acc, t) => acc + Math.abs(t?.amount), 0) || 0;
+      setWithdrawlMoney(w);
+      setPendingMoney(p);
+    } catch (err) {}
   }, [user]);
 
   if (!user) return null;
@@ -55,6 +59,14 @@ export default function ProfilePage() {
     <div className="profile-page page split-page">
       <div className="left">
         <div className="left-container">
+          <div className="heading-with-arrow">
+            <Link href="/">
+              <div className="icon">
+                <FaChevronLeft />
+              </div>
+            </Link>
+            <h1>Profile</h1>
+          </div>
           <div className="bio">
             <div className="name field">
               <span className="label">Name</span>
@@ -117,7 +129,7 @@ export default function ProfilePage() {
                 whileTap={{ scale: 0.7 }}
                 onClick={() => {
                   navigator?.clipboard?.writeText(
-                    `https://one-novel.vercell.app/register?ref=${user._id}`
+                    `https://wwww.onenovel.in/register?ref=${user._id}`
                   );
                   setIsCopied(true);
                   setTimeout(() => {

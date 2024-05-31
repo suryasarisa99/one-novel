@@ -52,7 +52,7 @@ function VerificationComponent() {
             content: `hello ${res.data.user.name}, You are Successfully Logined.`,
             onClick: () => {
               HidePopup();
-              router.push("/");
+              router.replace("/");
             },
             btnText: "Go Home",
           });
@@ -186,7 +186,7 @@ function VerificationComponent() {
           ></PopupBox>,
           document.getElementById("overlay")!
         )}
-      <div className="cross-bar"></div>
+      {/* <div className="cross-bar"></div> */}
       <div className="right">
         <Image src={BankImg} alt="otp" />
       </div>

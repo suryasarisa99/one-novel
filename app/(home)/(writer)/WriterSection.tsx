@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function WriterSection1() {
   return (
-    <div className="horizontal-section sec1">
+    <div className="horizontal-section sec1" id="w1">
       <div className="content">
         <div className="writer-img-outer">
           <motion.img

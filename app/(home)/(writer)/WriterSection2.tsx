@@ -11,7 +11,7 @@ export default function WriterSection2() {
     {
       num: "02",
       title: "Content",
-      des: "All genres accepted, but not explict contentand hate speech",
+      des: "All genres accepted, but not explict content and hate speech",
     },
     {
       num: "03",
@@ -20,7 +20,7 @@ export default function WriterSection2() {
     },
   ];
   return (
-    <div className="horizontal-section sec2">
+    <div className="horizontal-section sec2" id="w2">
       <div className="left">
         <h2 className="title">Submission Guidelines</h2>
         <motion.img

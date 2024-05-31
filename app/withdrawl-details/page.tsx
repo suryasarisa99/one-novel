@@ -8,6 +8,8 @@ import { createPortal } from "react-dom";
 import axios from "axios";
 import useData from "@/hooks/useData";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { FaChevronLeft } from "react-icons/fa";
 
 export default function WithdrawlPage() {
   const { token, user, setUser } = useData();
@@ -73,7 +75,7 @@ export default function WithdrawlPage() {
             content: "Withdrawl Request Sent Successfully.",
             onClick: () => {
               HidePopup();
-              router.push("/withdrawl");
+              router.replace("/withdrawl");
             },
             btnText: "Withdrawl Now",
           });
@@ -227,9 +229,7 @@ export default function WithdrawlPage() {
           document.getElementById("overlay")!
         )}
       <div className="left">
-        <div className="heading">
-          <p className="title">Withdrawl Details</p>
-        </div>
+        <p className="heading">Withdrawl Details</p>
         <motion.div
           initial={{ opacity: 0, x: -60 }}
           transition={{ delay: 0.1, duration: 0.25 }}
@@ -316,7 +316,7 @@ export default function WithdrawlPage() {
         </div>
       </div>
       <div className="cross-bar"></div>
-      <div className="right" style={{ height: "100%" }}></div>
+      <div className="right"></div>
     </div>
   );
 }

@@ -75,7 +75,7 @@ export default function LoginPage() {
             content: `hello ${res.data.user.name}, You are Successfully Logined.`,
             onClick: () => {
               hidePopup();
-              router.push("/");
+              router.replace("/");
             },
           });
           showPopup();
@@ -150,6 +150,17 @@ export default function LoginPage() {
         setPopupContent({
           title: "Password Reset Link Sent",
           content: `A password reset link has been sent to your ${res.data.mail}. Please check your mail.`,
+          onClick: hidePopup,
+        });
+        showPopup();
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        setPopupContent({
+          title: err?.response?.data?.title || "Error",
+          content:
+            err?.response?.data?.error ||
+            "An error occured. Please try again later.",
           onClick: hidePopup,
         });
         showPopup();

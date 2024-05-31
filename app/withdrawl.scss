@@ -1,7 +1,7 @@
 .only-withdrawl-page {
   gap: 20px;
   justify-content: center;
-  min-height: 80vh;
+  min-height: 100vh;
   form {
     // background-color: red;
     height: 55vh;
@@ -30,28 +30,49 @@
   background-color: var(--background-color);
   z-index: 2;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 20%;
+  left: 50%;
   right: 0px;
-  padding: 20px 25px;
+  transform: translateX(-50%);
+  padding: 25px 25px;
+  padding-left: 16px;
+  width: 95%;
+  max-width: 650px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
 
   h1.title {
     text-align: center;
     font-size: 24px;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
   }
 
-  max-width: 800px;
-  left: 50%;
-  transform: translateX(-50%);
+  .btns {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    // background-color: red;
+    .cancel-btn {
+      background-color: var(--primary-color);
+      color: var(--text-color);
+    }
+    button {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 40%;
+      max-width: 500px;
+    }
+  }
 
   .row-field {
     display: flex;
     // background-color: blue;
     align-items: center;
     margin-bottom: 8px;
+    gap: 12px;
 
     span.row {
       display: flex;
@@ -68,24 +89,18 @@
     }
 
     input {
-      width: 80px;
+      width: 30px;
       height: 30px;
       accent-color: var(--btn);
     }
     label {
       padding: 18px 20px;
+
       background-color: var(--primary-color);
       flex-grow: 1;
       font-size: 20px;
       border-radius: 8px;
     }
-  }
-
-  button {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 90%;
-    max-width: 500px;
   }
 }
 
@@ -93,13 +108,21 @@
   .withdrawl-popup {
     padding: 20px 14px;
     padding-right: 18px;
-    left: 0;
-    right: 0;
-    transform: translateX(0px);
-    // background-color: red;
+    width: 97%;
 
-    button {
-      width: 90%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    transform: translateX(0);
+
+    .btns {
+      width: 100%;
+      button {
+        width: 46%;
+      }
     }
 
     .row-field {
