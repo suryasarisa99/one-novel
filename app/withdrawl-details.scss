@@ -7,6 +7,14 @@
   margin-top: 40px;
   margin-bottom: 20px;
   color: var(--on-primary);
+  position: relative;
+
+  .icon {
+    position: absolute;
+    left: 22px;
+    font-size: 24px;
+    top: 14px;
+  }
 }
 .btns {
   gap: 5px;

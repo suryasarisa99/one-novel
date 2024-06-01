@@ -229,7 +229,14 @@ export default function WithdrawlPage() {
           document.getElementById("overlay")!
         )}
       <div className="left">
-        <p className="heading">Withdrawl Details</p>
+        <p className="heading">
+          <Link href="/">
+            <div className="icon">
+              <FaChevronLeft />
+            </div>
+          </Link>
+          Withdrawl Details
+        </p>
         <motion.div
           initial={{ opacity: 0, x: -60 }}
           transition={{ delay: 0.1, duration: 0.25 }}
