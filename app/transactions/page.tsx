@@ -36,7 +36,7 @@ export default function TrnasactionsPage() {
                     "amount " + (transaction.is_debit ? "deducted" : "added")
                   }
                 >
-                  {transaction.amount}
+                  {transaction.is_debit ? "-" : "+"} {transaction.amount}
                 </p>
               </div>
               <div className="bottom">

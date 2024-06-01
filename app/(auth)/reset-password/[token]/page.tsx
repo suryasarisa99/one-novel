@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 import PopupBox from "@/components/PopupBox";
@@ -20,6 +20,12 @@ export default function ResetPassword() {
   const router = useRouter();
   const { HidePopup, ShowPopup, setPopupContent, popupContent, popupIsOpened } =
     usePopup();
+
+  useEffect(() => {
+    return () => {
+      HidePopup();
+    };
+  });
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();

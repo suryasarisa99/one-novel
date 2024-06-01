@@ -25,12 +25,27 @@ export default function WithdrawlPage() {
   useEffect(() => {
     if (!user) return;
     if (user.withdrawlType == 0) router.push("/withdrawl-details");
+
+    return () => {
+      HidePopup();
+    };
   }, []);
 
   const router = useRouter();
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!user) return router.push("/login");
+    if (user.products.length == 0) {
+      setPopupContent({
+        title: "First Buy Product",
+        content: "Please Purchace a Book in One Novel, Inorder to withdrawl.",
+        onClick: HidePopup,
+        btnText: "Ok",
+      });
+      setCancel(defaultCancel);
+      ShowPopup();
+      return;
+    }
     if (user?.balance < balance) {
       setPopupContent({
         title: "Insufficient Balance",
@@ -94,7 +109,13 @@ export default function WithdrawlPage() {
         setUser({ ...user, balance: user.balance - balance });
       })
       .catch((err) => {
-        console.log(err);
+        setPopupContent({
+          title: err.response.data?.error || "Error",
+          content: err.response.data?.mssg || "Something went wrong",
+          onClick: HidePopup,
+          btnText: "Ok",
+        });
+        ShowPopup();
       });
   }
 

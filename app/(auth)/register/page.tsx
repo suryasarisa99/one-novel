@@ -2,7 +2,7 @@
 import logo from "@/public/logo.png";
 import registerImg from "@/public/register2.png";
 import { motion } from "framer-motion";
-import React, { useReducer, useState, Suspense } from "react";
+import React, { useReducer, useState, Suspense, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -48,6 +48,12 @@ function Register() {
 
   const { popupIsOpened, ShowPopup, HidePopup, popupContent, setPopupContent } =
     usePopup();
+
+  useEffect(() => {
+    return () => {
+      HidePopup();
+    };
+  }, []);
 
   function reducerFunction(
     state: typeof defaultError,
@@ -175,36 +181,20 @@ function Register() {
             "User Registeration is  Successfull. Please Verify  OTP to Continue.",
           onClick: () => {
             HidePopup();
-            router.push("/verification");
+            router.push(`/verification?id=${res.data.id}&email=${email}`);
           },
-          btnText: "Login Now",
+          btnText: "Verify Now",
         });
         ShowPopup();
       })
       .catch((err) => {
         console.log(err.response.data.error);
-        switch (err.response.data.error) {
-          case "Invalid referal": {
-            setPopupContent({
-              title: "Invalid Referral Code",
-              content:
-                "The referral code you entered is invalid. Please check and try again.",
-              onClick: HidePopup,
-              btnText: "Try Again",
-            });
-            break;
-          }
-          case "User already exists": {
-            setPopupContent({
-              title: "User Already Exists",
-              content:
-                "The Phone Number you entered is already registered. Please login to continue. or try with another number.",
-              onClick: HidePopup,
-              btnText: "Ok",
-            });
-            break;
-          }
-        }
+        setPopupContent({
+          title: err.response.data.error,
+          content: err.response.data.mssg,
+          onClick: HidePopup,
+          btnText: "Ok",
+        });
         ShowPopup();
       })
       .finally(() => {

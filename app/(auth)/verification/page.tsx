@@ -32,6 +32,12 @@ function VerificationComponent() {
   const { popupIsOpened, ShowPopup, HidePopup, popupContent, setPopupContent } =
     usePopup();
 
+  useEffect(() => {
+    return () => {
+      HidePopup();
+    };
+  }, []);
+
   function Submit() {
     const otp = otpInputsRef.current.map((input) => input.value).join("");
     console.log(id);
@@ -81,11 +87,15 @@ function VerificationComponent() {
             break;
           }
           case "User Already Verified": {
+            console.log("case match");
             setPopupContent({
               title: "User Already Verified",
               content:
                 "The user is already verified. Please login to continue.",
-              onClick: HidePopup,
+              onClick: () => {
+                HidePopup();
+                router.replace("/login");
+              },
               btnText: "Login Now",
             });
             break;
@@ -99,6 +109,7 @@ function VerificationComponent() {
             });
           }
         }
+        console.log("before calling show popup");
         ShowPopup();
       });
   }
@@ -183,6 +194,7 @@ function VerificationComponent() {
             title={popupContent.title}
             content={popupContent.content}
             onClick={popupContent.onClick}
+            btnText={popupContent.btnText}
           ></PopupBox>,
           document.getElementById("overlay")!
         )}

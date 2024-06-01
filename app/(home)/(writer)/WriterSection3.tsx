@@ -4,10 +4,15 @@ import Image from "next/image";
 import { ChangeEventHandler, FormEvent, useRef } from "react";
 import axios from "axios";
 import useData from "@/hooks/useData";
+import { createPortal } from "react-dom";
+import PopupBox from "@/components/PopupBox";
+import usePopup from "@/hooks/usePopup";
 
 export default function WriterSection3() {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const { isLoggedIn, user, token } = useData();
+  const { popupIsOpened, ShowPopup, HidePopup, popupContent, setPopupContent } =
+    usePopup();
   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     // file
     const file = e.target.files?.[0];
@@ -36,6 +41,15 @@ export default function WriterSection3() {
   };
   return (
     <div className="horizontal-section sec3 " id="w3">
+      {popupIsOpened &&
+        createPortal(
+          <PopupBox
+            title={popupContent.title}
+            content="{popupContent.content}"
+            onClick={popupContent.onClick}
+          />,
+          document.getElementById("overlay")!
+        )}
       <div className="left">
         <motion.img
           initial={{ y: 200, opacity: 0 }}
@@ -81,6 +95,16 @@ export default function WriterSection3() {
           className="floating-btn"
           onClick={() => {
             if (!isLoggedIn || !user) return;
+            if (user.products.length == 0) {
+              setPopupContent({
+                title: "First Buy a Product",
+                content: "You need to Buy a product to upload your Book",
+                onClick: HidePopup,
+                btnText: "Ok",
+              });
+              ShowPopup();
+              return;
+            }
             if (user.uploadStatus === "pending") return;
             inputFileRef.current?.click();
           }}

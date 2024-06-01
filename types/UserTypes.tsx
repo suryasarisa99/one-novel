@@ -14,6 +14,7 @@ export type UserType = {
   parents: string[];
   uploadUrl: string;
   uploadStatus: string;
+  level: number;
   transactions: {
     _id: string;
     transaction_id: string;

@@ -31,9 +31,14 @@ export default function WithdrawlPage() {
         ifsc: user.bank.ifsc,
       });
   }, [user?._id]);
-
   const { HidePopup, ShowPopup, popupIsOpened, popupContent, setPopupContent } =
     usePopup();
+
+  useEffect(() => {
+    return () => {
+      HidePopup();
+    };
+  });
 
   function ValidateUpiId(upiId: string) {
     const regex = /^([a-zA-Z1-9-]+)@([a-zA-Z]+)$/;

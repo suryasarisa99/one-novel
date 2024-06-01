@@ -47,6 +47,7 @@ export default function Home() {
   const { isLoggedIn } = useData();
   const [writersPopup, setWriterPopup] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const { user } = useData();
   const [currentPageNo, setCurrentPage] = useState(0);
 
   function stopAutoScroll() {
@@ -166,7 +167,7 @@ export default function Home() {
       <div className="horizontal-carousel-outer home-page-section">
         <div className="page-indicator">
           <div className="page-indicator-inner">
-            {[0, 1, 2, 3].map((i) => {
+            {(user ? [0, 1, 2, 3] : [0, 1]).map((i) => {
               return (
                 <div
                   key={i}

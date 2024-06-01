@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -10,6 +10,7 @@ import { LuClipboardCheck } from "react-icons/lu";
 import useData from "@/hooks/useData";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 export default function ProfilePage() {
   const [isCopied, setIsCopied] = useState(false);
@@ -36,19 +37,18 @@ export default function ProfilePage() {
     if (!user || !user.transactions) return;
     try {
       const w =
-        user?.transactions
-          ?.filter(
+        user.transactions
+          .filter(
             (t) =>
-              t?.transaction_type === "withdrawl" && t?.status === "accepted"
+              t?.transaction_type === "withdrawl" && t.status === "accepted"
           )
-          ?.reduce((acc, t) => acc + Math.abs(t?.amount), 0) || 0;
+          .reduce((acc, t) => acc + Math.abs(t?.amount), 0) || 0;
       const p =
-        user?.transactions
-          ?.filter(
-            (t) =>
-              t?.transaction_type === "withdrawl" && t?.status === "pending"
+        user.transactions
+          .filter(
+            (t) => t?.transaction_type === "withdrawl" && t.status === "pending"
           )
-          ?.reduce((acc, t) => acc + Math.abs(t?.amount), 0) || 0;
+          .reduce((acc, t) => acc + Math.abs(t.amount), 0) || 0;
       setWithdrawlMoney(w);
       setPendingMoney(p);
     } catch (err) {
@@ -82,11 +82,24 @@ export default function ProfilePage() {
               <span className="label">Phone</span>
               <span className="value">{user.number}</span>
             </div>
+            <div className="phone field">
+              <span className="label">Position</span>
+              <span className="value">
+                {
+                  [
+                    "Aspiring Author",
+                    "Junior Associate",
+                    "Senior Associate",
+                    "Business Development Manager",
+                  ][user.level]
+                }
+              </span>
+            </div>
           </div>
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+          <div
+            // initial={{ opacity: 0, x: -100 }}
+            // animate={{ opacity: 1, x: 0 }}
+            // transition={{ duration: 0.5 }}
             className="details"
           >
             <div className="balance field">
@@ -116,19 +129,22 @@ export default function ProfilePage() {
               <span className="value">{user.transactions.length}</span>
               <span className="label">Transactions</span>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+          <div
+            // initial={{ opacity: 0, x: 100 }}
+            // animate={{ opacity: 1, x: 0 }}
+            // transition={{ duration: 0.5 }}
             className="refer-code-box"
           >
             <div className="title">
               <span>Referal Code</span>
-              <motion.div
+              <div
                 className="icon"
-                whileTap={{ scale: 0.7 }}
+                // initial={{ scale: 1 }}
+                // whileTap={{
+                //   scale: 0.7,
+                // }}
                 onClick={() => {
                   navigator?.clipboard?.writeText(
                     `https://www.onenovel.in/register?ref=${user._id}`
@@ -140,15 +156,15 @@ export default function ProfilePage() {
                 }}
               >
                 {isCopied ? <LuClipboardCheck /> : <LuClipboard />}
-              </motion.div>
+              </div>
             </div>
             <div className="value">{user._id}</div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+          <div
+            // initial={{ opacity: 0, x: -100 }}
+            // animate={{ opacity: 1, x: 0 }}
+            // transition={{ duration: 0.5 }}
             className="section"
           >
             <Link href="/transactions" className="item-outer">
@@ -189,6 +205,33 @@ export default function ProfilePage() {
             <div
               className="item-outer"
               onClick={() => {
+                console.log("requested");
+                axios
+                  .get(`${process.env.NEXT_PUBLIC_SERVER}/auth/position`, {
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                  })
+                  .then((res) => {
+                    console.log(res.data);
+                    if (res.data.increased) {
+                      setUser({
+                        ...res.data.user,
+                      });
+                    }
+                  })
+                  .catch((e) => {
+                    console.log(e);
+                  });
+              }}
+            >
+              <div className="item">
+                <span className="label">Recheck My Position</span>
+              </div>
+            </div>
+            <div
+              className="item-outer"
+              onClick={() => {
                 router.push("/register");
                 localStorage.removeItem("token");
                 setUser(null);
@@ -200,7 +243,7 @@ export default function ProfilePage() {
                 <span className="label">SignOut</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
       <div className="cross-bar"></div>

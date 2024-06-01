@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import logo from "../../../public/logo.png";
 import { motion } from "framer-motion";
@@ -22,6 +22,13 @@ export default function LoginPage() {
   const { setToken, setUser, setIsLoggedIn, ShowOverlay, HideOverlay } =
     useData();
   const router = useRouter();
+
+  useEffect(() => {
+    return () => {
+      HideOverlay();
+      setPopup(false);
+    };
+  }, []);
 
   const defaultError = {
     allFieldsRequired: false,
@@ -83,47 +90,13 @@ export default function LoginPage() {
       })
       .catch((err) => {
         console.log(err.response.data);
-        switch (err.response.data.error) {
-          case "User Not Exist": {
-            setPopupContent({
-              title: "User Not Exist",
-              content:
-                "No user found with this phone number. Please Signup to continue.",
-              // "The phone number you entered is Not registered, Please Signup to continue.",
-              onClick: hidePopup,
-            });
-            break;
-          }
-          case "Invalid Password": {
-            setPopupContent({
-              title: "Invalid Password",
-              content:
-                "The password you entered is incorrect. Please try again.",
-              onClick: hidePopup,
-            });
-            break;
-          }
-          case "User not verified": {
-            setPopupContent({
-              title: "User Not Verified",
-              content:
-                "The phone number you entered is not verified. Please verify your number to continue.",
-              onClick: () => {
-                hidePopup();
-                router.push(`/verification?id=${err.response.data.id}`);
-              },
-            });
-            break;
-          }
-          default: {
-            console.log("default case: ", err.response.data.error);
-            setPopupContent({
-              title: err.response.data.error,
-              content: "An error occured. Please try again later.",
-              onClick: hidePopup,
-            });
-          }
-        }
+        setPopupContent({
+          title: err?.response?.data?.error || "Error",
+          content:
+            err?.response?.data?.mssg ||
+            "An error occured. Please try again later.",
+          onClick: hidePopup,
+        });
         showPopup();
       })
       .finally(() => {
@@ -157,9 +130,9 @@ export default function LoginPage() {
       .catch((err) => {
         console.log(err.response.data);
         setPopupContent({
-          title: err?.response?.data?.title || "Error",
+          title: err?.response?.data?.error || "Error",
           content:
-            err?.response?.data?.error ||
+            err?.response?.data?.mssg ||
             "An error occured. Please try again later.",
           onClick: hidePopup,
         });
