@@ -89,6 +89,7 @@ export default function ProfilePage() {
                   [
                     "Aspiring Author",
                     "Junior Associate",
+                    "Associate Manager",
                     "Senior Associate",
                     "Business Development Manager",
                   ][user.level]

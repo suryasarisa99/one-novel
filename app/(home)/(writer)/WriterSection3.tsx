@@ -45,7 +45,7 @@ export default function WriterSection3() {
         createPortal(
           <PopupBox
             title={popupContent.title}
-            content="{popupContent.content}"
+            content={popupContent.content}
             onClick={popupContent.onClick}
           />,
           document.getElementById("overlay")!
