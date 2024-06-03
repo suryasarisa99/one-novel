@@ -25,12 +25,8 @@ export default function AboutSection() {
       <div className="bottom-section">
         <div className="contact-info">
           <p>
-            <span className="label">Gmail</span>
+            <span className="label">contact</span>
             <span className="value">1.one.novel.service@gmail.com</span>
-          </p>
-          <p>
-            <span className="label">Mobile No </span>
-            <span className="value">9876543210</span>
           </p>
         </div>
         <div className="links">
