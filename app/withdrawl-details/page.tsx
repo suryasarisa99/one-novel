@@ -236,9 +236,9 @@ export default function WithdrawlPage() {
       <div className="left">
         <p className="heading">
           <Link href="/">
-            <div className="icon">
+            <p className="icon">
               <FaChevronLeft />
-            </div>
+            </p>
           </Link>
           Withdrawl Details
         </p>
@@ -314,12 +314,6 @@ export default function WithdrawlPage() {
             value={bank.ifsc}
             onChange={(e) => setBank({ ...bank, ifsc: e.target.value })}
           />
-          {/* <input
-            type="number"
-            placeholder="Enter Mobile Number"
-            value={bank.mobile}
-            onChange={(e) => setBank({ ...bank, mobile: e.target.value })}
-          /> */}
         </motion.div>
         <div className="btn-row">
           <button className="submit" onClick={handleSubmit}>

@@ -10,6 +10,7 @@ import { FaRegUser, FaUser } from "react-icons/fa";
 import { IoWalletOutline, IoWallet } from "react-icons/io5";
 
 import "@/public/logo.png";
+import { BiGift, BiSolidGift } from "react-icons/bi";
 
 export default function TopBar({
   stopAutoScroll,
@@ -42,16 +43,6 @@ export default function TopBar({
               <FaUser className="fill" size={22} />
             </Link>
           )}
-          {/* <span
-            onClick={() => {
-              stopAutoScroll();
-              if (!user) return router.push("/login");
-              router.push("/profile");
-            }}
-          >
-            <FaRegUser className="outline" size={22} />
-            <FaUser className="fill" size={22} />
-          </span> */}
         </li>
 
         <li className="wallet">
@@ -62,17 +53,6 @@ export default function TopBar({
               Balance:
               <span className="amount">₹ {user?.balance || 0} </span>
             </p>
-            {/* <button
-              className="withdrawl-btn"
-              onClick={() => {
-                stopAutoScroll();
-                if (!user) return router.push("/login");
-                if (user.withdrawlType === 0) router.push("/withdrawl-details");
-                else router.push("/withdrawl");
-              }}
-            >
-              With Drawl
-            </button> */}
             <Link
               href={
                 !user
@@ -85,6 +65,28 @@ export default function TopBar({
             >
               With Drawl
             </Link>
+          </div>
+        </li>
+        <li className="wallet">
+          <BiGift size={24} className="outline" />
+          <BiSolidGift size={24} className="fill" />
+          <div className="wallet-box">
+            <p className="balance">
+              Amount:
+              <span className="amount">
+                ₹{" "}
+                {user?.transactions
+                  ?.filter((t) => t.transaction_type == "Gift")
+                  .reduce((s, t) => s + t.amount, 0) || 0}
+              </span>
+            </p>
+            <p className="balance">
+              Gifts 🎁 :
+              <span className="amount">
+                {user?.transactions?.filter((t) => t.transaction_type == "Gift")
+                  .length || 0}
+              </span>
+            </p>
           </div>
         </li>
         <li className="long-elm">

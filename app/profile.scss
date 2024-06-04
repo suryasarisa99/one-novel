@@ -208,6 +208,28 @@
   }
 }
 
+.referals-count {
+  margin: 12px 20px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--background-color);
+
+  .referals-count-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    // background-color: red;
+  }
+  span:last-child {
+    background-color: var(--primary-color);
+    padding: 1px 16px;
+    border-radius: 6px;
+  }
+}
+
 .referal-selector {
   display: flex;
   justify-content: space-between;

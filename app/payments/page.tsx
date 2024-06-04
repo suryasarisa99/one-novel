@@ -19,13 +19,14 @@ export default function PaymentsPage() {
   const [utr, setUtr] = useState("");
   const { HidePopup, ShowPopup, popupContent, setPopupContent, popupIsOpened } =
     usePopup();
-  const upiId = "suryasarisa99-2@okhdfcbank";
+  const upiId = "9885199556@paytm";
+  const upiId2 = "9885199556@ybl";
   const { user, token } = useData();
   const router = useRouter();
 
   useEffect(() => {
     const transactionAmount = 5000;
-    const upiUrl = `upi://pay?pa=suryasarisa99-2@okhdfcbank&pn=YourName&am=${transactionAmount}&cu=INR`;
+    const upiUrl = `upi://pay?pa=${upiId}&pn=YourName&am=${transactionAmount}&cu=INR`;
     qrcode.toDataURL(upiUrl, (err, url) => {
       if (err) console.error(err);
       else setQr(url);
@@ -117,6 +118,30 @@ export default function PaymentsPage() {
               whileTap={{ scale: 0.7 }}
               onClick={() => {
                 navigator?.clipboard?.writeText(upiId);
+                setIsCopied(true);
+                setTimeout(() => {
+                  setIsCopied(false);
+                }, 1000);
+              }}
+            >
+              {isCopied ? (
+                <LuClipboardCheck size={22} />
+              ) : (
+                <LuClipboard size={20} />
+              )}
+            </motion.div>
+          </div>
+          <p className="or">Or </p>
+          <div className="upi-id-box">
+            <div className="left">
+              <p className="info">copy UPI id</p>
+              <p className="id">{upiId2}</p>
+            </div>
+            <motion.div
+              className="icon"
+              whileTap={{ scale: 0.7 }}
+              onClick={() => {
+                navigator?.clipboard?.writeText(upiId2);
                 setIsCopied(true);
                 setTimeout(() => {
                   setIsCopied(false);

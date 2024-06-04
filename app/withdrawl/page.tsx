@@ -46,6 +46,17 @@ export default function WithdrawlPage() {
       ShowPopup();
       return;
     }
+    if (user.balance < 1000) {
+      setPopupContent({
+        title: "Minimum Withdrawl",
+        content: "You can withdrawl minimum ₹1000, Try Again",
+        onClick: HidePopup,
+        btnText: "Ok",
+      });
+      setCancel(defaultCancel);
+      ShowPopup();
+      return;
+    }
     if (user?.balance < balance) {
       setPopupContent({
         title: "Insufficient Balance",

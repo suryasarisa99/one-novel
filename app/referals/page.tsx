@@ -10,6 +10,8 @@ export default function TrnasactionsPage() {
   const [selectedReferal, setSelectedReferal] = useState<1 | 2 | 3 | 4>(1);
   const referalsLevels = [1, 2, 3, 4];
 
+  type ReferalType = "level1" | "level2" | "level3" | "level4";
+
   useEffect(() => {
     const metaThemeColor = document.querySelector("meta[name=theme-color]");
     if (!metaThemeColor) return;
@@ -44,7 +46,38 @@ export default function TrnasactionsPage() {
           );
         })}
       </div>
+      {/*  */}
 
+      <div className="referals-count">
+        <div className="referals-count-item">
+          <span>Valid</span>
+          <span>
+            {
+              user.children[("level" + selectedReferal) as ReferalType].filter(
+                (referal) => referal.valid
+              ).length
+            }
+          </span>
+        </div>
+        <div className="referals-count-item">
+          <span>Invalid</span>
+          <span>
+            {
+              user.children[("level" + selectedReferal) as ReferalType].filter(
+                (referal) => !referal.valid
+              ).length
+            }
+          </span>
+        </div>
+        <div className="referals-count-item">
+          <span>Total</span>
+          <span>
+            {user.children[("level" + selectedReferal) as ReferalType].length}
+          </span>
+        </div>
+      </div>
+
+      {/*  */}
       <div className="referals">
         {user.children[
           ("level" + selectedReferal) as

@@ -11,6 +11,9 @@ import useData from "@/hooks/useData";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
+import usePopup from "@/hooks/usePopup";
+import PopupBox from "@/components/PopupBox";
+import { createPortal } from "react-dom";
 
 export default function ProfilePage() {
   const [isCopied, setIsCopied] = useState(false);
@@ -18,6 +21,9 @@ export default function ProfilePage() {
   const { user, setUser, setToken, setIsLoggedIn } = useData();
   const [withdrawlMoney, setWithdrawlMoney] = useState(0);
   const [PendingMoney, setPendingMoney] = useState(0);
+
+  const { HidePopup, ShowPopup, setPopupContent, popupContent, popupIsOpened } =
+    usePopup();
 
   useEffect(() => {
     const metaThemeColor = document.querySelector("meta[name=theme-color]");
@@ -31,6 +37,8 @@ export default function ProfilePage() {
     } else {
       metaThemeColor.setAttribute("content", "#f5f4f0");
     }
+
+    return () => {};
   }, []);
 
   useEffect(() => {
@@ -249,6 +257,8 @@ export default function ProfilePage() {
       </div>
       <div className="cross-bar"></div>
       <div className="right"></div>
+      {popupIsOpened &&
+        createPortal(<div></div>, document.getElementById("overlay")!)}
     </div>
   );
 }
