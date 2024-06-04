@@ -234,20 +234,20 @@ export default function WithdrawlPage() {
           document.getElementById("overlay")!
         )}
       <div className="left">
-        <p className="heading">
-          <Link href="/">
-            <p className="icon">
-              <FaChevronLeft />
-            </p>
-          </Link>
-          Withdrawl Details
-        </p>
         <motion.div
           initial={{ opacity: 0, x: -60 }}
           transition={{ delay: 0.1, duration: 0.25 }}
           whileInView={{ opacity: 1, x: 0 }}
           className="payment-option"
         >
+          <p className="heading">
+            <Link href="/">
+              <p className="icon">
+                <FaChevronLeft />
+              </p>
+            </Link>
+            Withdrawl Details
+          </p>
           <p className="title">Upi Id :</p>
           <input
             type="text"

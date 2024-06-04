@@ -8,12 +8,13 @@
   margin-bottom: 20px;
   color: var(--on-primary);
   position: relative;
+  align-items: center;
 
   .icon {
     position: absolute;
-    left: 22px;
+    left: -5px;
     font-size: 24px;
-    top: 14px;
+    top: 17.5px;
   }
 }
 .btns {

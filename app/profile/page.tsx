@@ -14,6 +14,7 @@ import axios from "axios";
 import usePopup from "@/hooks/usePopup";
 import PopupBox from "@/components/PopupBox";
 import { createPortal } from "react-dom";
+import PopupLayout from "@/components/PopupLayout";
 
 export default function ProfilePage() {
   const [isCopied, setIsCopied] = useState(false);
@@ -21,6 +22,12 @@ export default function ProfilePage() {
   const { user, setUser, setToken, setIsLoggedIn } = useData();
   const [withdrawlMoney, setWithdrawlMoney] = useState(0);
   const [PendingMoney, setPendingMoney] = useState(0);
+  type GiftType = {
+    forLevel: number;
+    amount: number;
+  };
+  const [showPopup, setShowPopup] = useState(false);
+  const [gifts, setGifts] = useState<GiftType[]>([]);
 
   const { HidePopup, ShowPopup, setPopupContent, popupContent, popupIsOpened } =
     usePopup();
@@ -124,11 +131,11 @@ export default function ProfilePage() {
               <span className="value">₹ {PendingMoney}</span>
               <span className="label">Pending</span>
             </div>
-            <div className="referals field">
+            <div className="referals-item field">
               <span className="value">{user.children.level1.length}</span>
               <span className="label">Referals</span>
             </div>
-            <div className="referals field">
+            <div className="referals-item field">
               <span className="value">
                 {user.children.level1.filter((c) => c.valid).length}
               </span>
@@ -224,6 +231,8 @@ export default function ProfilePage() {
                   .then((res) => {
                     console.log(res.data);
                     if (res.data.increased) {
+                      setShowPopup(true);
+                      setGifts(res.data.gifts);
                       setUser({
                         ...res.data.user,
                       });
@@ -257,6 +266,44 @@ export default function ProfilePage() {
       </div>
       <div className="cross-bar"></div>
       <div className="right"></div>
+      <PopupLayout show={showPopup} setPopup={setShowPopup}>
+        <div className="gift-popup">
+          <img src="/gift.png" alt="gift" />
+          <div className="content">
+            {gifts.map((g, i) => (
+              <div className="item" key={i}>
+                <div className="flex">
+                  <span className="label">GIFT</span>
+                  <span className="value">+{g.amount}</span>
+                </div>
+                <p>
+                  On Reaching
+                  <span className="level">
+                    {
+                      [
+                        "Aspiring Author",
+                        "Junior Associate",
+                        "Associate Manager",
+                        "Senior Associate",
+                        "Business Development Manager",
+                      ][g.forLevel]
+                    }
+                  </span>
+                </p>
+              </div>
+            ))}
+            <center>
+              <button
+                onClick={() => {
+                  setShowPopup(false);
+                }}
+              >
+                Claim
+              </button>
+            </center>
+          </div>
+        </div>
+      </PopupLayout>
       {popupIsOpened &&
         createPortal(<div></div>, document.getElementById("overlay")!)}
     </div>

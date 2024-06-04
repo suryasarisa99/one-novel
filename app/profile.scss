@@ -151,6 +151,8 @@
   min-height: 100vh;
   .transactions {
     padding: 12px 16px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
   }
   .transaction {
     padding: 8px 14px;
@@ -256,7 +258,10 @@
 
 .referals {
   padding: 10px 20px;
-
+  height: calc(100vh - 60px - 60.8px - 80px);
+  overflow-y: auto;
+  // background-color: red;
+  padding-bottom: 30px;
   .referal {
     display: flex;
     justify-content: space-between;
