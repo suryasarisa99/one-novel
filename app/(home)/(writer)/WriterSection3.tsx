@@ -1,19 +1,20 @@
-import { motion, useSpring, useTransform } from "framer-motion";
-import img from "@/public/writer/w3.jpg";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { ChangeEventHandler, FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import axios from "axios";
 import useData from "@/hooks/useData";
 import { createPortal } from "react-dom";
 import PopupBox from "@/components/PopupBox";
 import usePopup from "@/hooks/usePopup";
+import firebase from "firebase/app";
 import {
   ref,
   uploadBytes,
   getDownloadURL,
   uploadBytesResumable,
+  getStorage,
 } from "firebase/storage";
-import storage from "@/firebaseConfig.js";
+import initFirebase from "@/firebaseConfig.js";
 import PopupLayout from "@/components/PopupLayout";
 
 export default function WriterSection3() {
@@ -24,13 +25,17 @@ export default function WriterSection3() {
   const [loading, setLoading] = useState(false);
   const { popupIsOpened, ShowPopup, HidePopup, popupContent, setPopupContent } =
     usePopup();
-  const progressSpring = useSpring(progress, {
-    stiffness: 10, // Adjust stiffness and damping for different spring dynamics
-    damping: 10,
-  });
-  const progressWidth = useTransform(progressSpring, (value) => `${value}%`);
 
   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    initFirebase();
+
+    let storage;
+    if (typeof window !== "undefined") {
+      require("firebase/storage");
+      storage = getStorage();
+    }
+    if (!storage) return;
+
     const file = e.target.files?.[0];
     console.log(file);
 

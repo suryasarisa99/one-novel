@@ -19,7 +19,7 @@ export default function UploadPage() {
               <div className="left">
                 <button
                   onClick={() => {
-                    window.open(book.url, "_blank");
+                    open(book.url, "_blank");
                   }}
                 >
                   View Book {index + 1}
