@@ -798,60 +798,60 @@ nav {
   }
 }
 
-@media screen and (prefers-color-scheme: dark) {
-  .about-page {
-    .mask {
-      background-color: rgba(42, 41, 36, 0.604);
-      .box {
-        background-color: rgba(169, 165, 146, 0.734);
-        color: rgb(0, 0, 0);
-      }
-    }
-    .bottom-section {
-      .contact-info {
-        p {
-          color: var(--on-bg-title);
-        }
-      }
-      .links {
-        a {
-          color: var(--on-bg-title);
-        }
-      }
-    }
-  }
-  .page3 {
-    .row {
-      img.img1,
-      img.img2,
-      img.img3 {
-        border: 4px solid #56544f;
-        box-shadow: 2px 2px 14px 3px rgba(0, 0, 0, 0.3);
-      }
-    }
-  }
-  .home-page {
-    .title {
-      color: black;
-    }
-    button {
-      color: black;
-      background-color: #e8edf0;
-    }
-  }
-  nav {
-    .menu {
-      li {
-        .link {
-          color: black;
-          &::before {
-            background-color: black;
-          }
-        }
-      }
-    }
-  }
-}
+// @media screen and (prefers-color-scheme: dark) {
+//   .about-page {
+//     .mask {
+//       background-color: rgba(42, 41, 36, 0.604);
+//       .box {
+//         background-color: rgba(169, 165, 146, 0.734);
+//         color: rgb(0, 0, 0);
+//       }
+//     }
+//     .bottom-section {
+//       .contact-info {
+//         p {
+//           color: var(--on-bg-title);
+//         }
+//       }
+//       .links {
+//         a {
+//           color: var(--on-bg-title);
+//         }
+//       }
+//     }
+//   }
+//   .page3 {
+//     .row {
+//       img.img1,
+//       img.img2,
+//       img.img3 {
+//         border: 4px solid var(--primary-color);
+//         box-shadow: 2px 2px 14px 3px rgba(0, 0, 0, 0.3);
+//       }
+//     }
+//   }
+//   .home-page {
+//     .title {
+//       color: black;
+//     }
+//     button {
+//       color: black;
+//       background-color: #e8edf0;
+//     }
+//   }
+//   nav {
+//     .menu {
+//       li {
+//         .link {
+//           color: black;
+//           &::before {
+//             background-color: black;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 @keyframes float {
   0% {

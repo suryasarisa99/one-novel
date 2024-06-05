@@ -56,6 +56,7 @@ export default function LoginPage() {
 
   function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (loading) return;
     if (!phoneNumber || !password) {
       setPopupContent({
         title: "All Fields Required",
@@ -187,7 +188,9 @@ export default function LoginPage() {
               Forgot Password
             </button>
           </div>
-          <button type="submit">Login</button>
+          <button type="submit">
+            {loading ? <div className="loader"></div> : "Login"}
+          </button>
         </motion.form>
         <motion.div
           initial={{ opacity: 0, y: 100 }}

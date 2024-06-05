@@ -146,6 +146,9 @@
       button {
         background-color: var(--btn);
         color: var(--on-btn);
+        .loader {
+          height: 18px;
+        }
       }
     }
   }
@@ -303,5 +306,39 @@
         }
       }
     }
+  }
+}
+
+.upload-popup {
+  padding: 20px 24px;
+  min-height: 260px;
+  height: fit-content;
+  // background-color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+
+  .title {
+    font-size: 24px;
+  }
+
+  .progress-bar {
+    background-color: var(--background-color);
+    width: 80%;
+    border-radius: 12px;
+    background-color: rgb(255, 255, 255);
+    outline: 1px solid rgba(35, 34, 34, 0.584);
+    outline-offset: 2px;
+  }
+  .progress {
+    width: 0; // try width: 0% if prior one do not work
+    background-color: black;
+    -webkit-transition: width 0.3s ease;
+    -o-transition: width 0.3 ease;
+    transition: width 0.3 ease;
+    height: 10px;
+    border-radius: 10px;
   }
 }

@@ -31,7 +31,7 @@ export default function PopupLayout({ show, setPopup, children }: Props) {
     return () => {
       const overlay = document.getElementById("overlay");
       overlay?.removeEventListener("click", closeOverlay);
-
+      if (!overlay) return;
       overlay!.className = "hidden";
       document.documentElement.style.overflow = "auto";
     };

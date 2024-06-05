@@ -23,6 +23,7 @@ export default function PaymentsPage() {
   const upiId2 = "9885199556@ybl";
   const { user, token } = useData();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const transactionAmount = 5000;
@@ -35,7 +36,7 @@ export default function PaymentsPage() {
 
   function handleFormSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!user) return;
+    if (!user || loading) return;
 
     if (utr == "") {
       setPopupContent({
@@ -48,6 +49,7 @@ export default function PaymentsPage() {
       return;
     }
 
+    setLoading(true);
     axios
       .post(
         `${process.env.NEXT_PUBLIC_SERVER}/m-pay/pay`,
@@ -75,6 +77,9 @@ export default function PaymentsPage() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
@@ -166,7 +171,11 @@ export default function PaymentsPage() {
           onChange={(e) => setUtr(e.target.value)}
           placeholder="12 Digits UTR Number"
         />
-        <button>Confirm Payment</button>
+        <button>
+          <center>
+            {loading ? <div className="loader"></div> : " Confirm Payment"}
+          </center>
+        </button>
       </form>
       {/* </div> */}
       <div className="right"></div>

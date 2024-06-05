@@ -85,7 +85,7 @@ function Register() {
   function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (loading) setLoading(false);
+    if (loading) return;
     let error = false;
 
     if (
@@ -310,24 +310,6 @@ function Register() {
             onChange={(e) => setReferralCode(e.target.value)}
           />
           <div className="errors"></div>
-          {/* <select
-            value={securityQuestion}
-            onChange={(e) => setSecurityQuestion(+e.target.value)}
-          >
-            <option value="" disabled selected>
-              Select the Security Question
-            </option>
-            {securityQuestions.map((question, i) => (
-              <option key={i}>{question}</option>
-            ))}
-          </select>
-          <input
-            type="text"
-            value={securityAnswer}
-            onChange={(e) => setSecurityAnswer(e.target.value)}
-            placeholder="Answer to Security Question"
-          />
-          <div className="errors"></div> */}
           <button type="submit">
             {loading ? <div className="loader"></div> : "Register"}
           </button>

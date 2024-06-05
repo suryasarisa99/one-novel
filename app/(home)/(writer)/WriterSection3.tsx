@@ -1,43 +1,100 @@
-import { motion } from "framer-motion";
+import { motion, useSpring, useTransform } from "framer-motion";
 import img from "@/public/writer/w3.jpg";
 import Image from "next/image";
-import { ChangeEventHandler, FormEvent, useRef } from "react";
+import { ChangeEventHandler, FormEvent, useRef, useState } from "react";
 import axios from "axios";
 import useData from "@/hooks/useData";
 import { createPortal } from "react-dom";
 import PopupBox from "@/components/PopupBox";
 import usePopup from "@/hooks/usePopup";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
+import storage from "@/firebaseConfig.js";
+import PopupLayout from "@/components/PopupLayout";
 
 export default function WriterSection3() {
   const inputFileRef = useRef<HTMLInputElement>(null);
-  const { isLoggedIn, user, token } = useData();
+  const { isLoggedIn, user, token, setUser } = useData();
+  const [progress, setProgress] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { popupIsOpened, ShowPopup, HidePopup, popupContent, setPopupContent } =
     usePopup();
+  const progressSpring = useSpring(progress, {
+    stiffness: 10, // Adjust stiffness and damping for different spring dynamics
+    damping: 10,
+  });
+  const progressWidth = useTransform(progressSpring, (value) => `${value}%`);
+
   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // file
     const file = e.target.files?.[0];
     console.log(file);
 
+    setShowPopup(true);
+    setLoading(true);
     if (file) {
-      const formData = new FormData();
-      formData.append("file", file);
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER}/auth/upload?fileName=${file.name}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((res) => {
-          console.log(res.data);
-        });
-    }
+      const storageRef = ref(storage, `pdfs/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-    // Your code here
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Observe state change events such as progress, pause, and resume
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setProgress(Math.max(0, progress - 14));
+          console.log("Upload is " + progress + "% done");
+        },
+        (error) => {
+          // Handle unsuccessful uploads
+
+          console.log(error);
+        },
+        async () => {
+          setProgress(93);
+          const downloadURL = await getDownloadURL(storageRef);
+          axios
+            .post(
+              `${process.env.NEXT_PUBLIC_SERVER}/auth/upload-url`,
+              {
+                url: downloadURL,
+              },
+              {
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              }
+            )
+            .then((res) => {
+              setProgress(100);
+              if (res.data.success)
+                setUser((prvUser) => {
+                  if (!prvUser) return prvUser;
+                  prvUser.uploadedBooks.push({
+                    url: downloadURL,
+                    status: "pending",
+                    date: new Date().toISOString(),
+                  });
+                  return { ...prvUser };
+                });
+              setTimeout(() => {
+                setShowPopup(false);
+              }, 500);
+              setLoading(false);
+            })
+            .catch((res) => {
+              console.log(res);
+            });
+          console.log("Download URL: ", downloadURL);
+          console.log("Upload completed successfully");
+        }
+      );
+    }
   };
   return (
     <div className="horizontal-section sec3 " id="w3">
@@ -50,6 +107,19 @@ export default function WriterSection3() {
           />,
           document.getElementById("overlay")!
         )}
+      <PopupLayout show={showPopup} setPopup={setShowPopup}>
+        <div className="upload-popup">
+          <div className="title">Uploading</div>
+          <motion.div className="progress-bar">
+            <div
+              className="progress"
+              style={{
+                width: `${progress}%`,
+              }}
+            ></div>
+          </motion.div>
+        </div>
+      </PopupLayout>
       <div className="left">
         <motion.img
           initial={{ y: 200, opacity: 0 }}
@@ -105,16 +175,38 @@ export default function WriterSection3() {
               ShowPopup();
               return;
             }
-            if (user.uploadStatus === "pending") return;
+            if (
+              user?.uploadedBooks[user?.uploadedBooks.length - 1]?.status ===
+              "pending"
+            ) {
+              setPopupContent({
+                title: "Already Uploaded",
+                content:
+                  "You have already uploaded a book. Please wait for the review, After the review you can upload another book.",
+                onClick: HidePopup,
+                btnText: "Ok",
+              });
+              ShowPopup();
+              return;
+            }
             inputFileRef.current?.click();
           }}
         >
-          {
+          {loading ? (
+            <center>
+              <div className="loader"></div>
+            </center>
+          ) : (
             {
               pending: "Uploaded",
               default: "Upload",
-            }[user?.uploadStatus || "default"]
-          }
+              accepted: "Upload",
+              rejected: "Upload",
+            }[
+              user?.uploadedBooks[user?.uploadedBooks.length - 1]?.status ||
+                "default"
+            ]
+          )}
         </motion.button>
       </div>
     </div>

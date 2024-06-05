@@ -22,6 +22,7 @@ export default function ProfilePage() {
   const { user, setUser, setToken, setIsLoggedIn } = useData();
   const [withdrawlMoney, setWithdrawlMoney] = useState(0);
   const [PendingMoney, setPendingMoney] = useState(0);
+  const [giftMoney, setGiftMoney] = useState(0);
   type GiftType = {
     forLevel: number;
     amount: number;
@@ -64,6 +65,12 @@ export default function ProfilePage() {
             (t) => t?.transaction_type === "withdrawl" && t.status === "pending"
           )
           .reduce((acc, t) => acc + Math.abs(t.amount), 0) || 0;
+      const g =
+        user.transactions
+          .filter((t) => t?.transaction_type === "Gift")
+          .reduce((acc, t) => acc + Math.abs(t.amount), 0) || 0;
+
+      setGiftMoney(g);
       setWithdrawlMoney(w);
       setPendingMoney(p);
     } catch (err) {
@@ -132,18 +139,26 @@ export default function ProfilePage() {
               <span className="label">Pending</span>
             </div>
             <div className="referals-item field">
-              <span className="value">{user.children.level1.length}</span>
+              <span className="value">
+                {user.children.level1.length +
+                  user.children.level2.length +
+                  user.children.level3.length +
+                  user.children.level4.length}
+              </span>
               <span className="label">Referals</span>
             </div>
             <div className="referals-item field">
               <span className="value">
-                {user.children.level1.filter((c) => c.valid).length}
+                {user.children.level1.filter((c) => c.valid).length +
+                  user.children.level2.filter((c) => c.valid).length +
+                  user.children.level3.filter((c) => c.valid).length +
+                  user.children.level4.filter((c) => c.valid).length}
               </span>
               <span className="label">Valid Ref</span>
             </div>
             <div className="transactions field">
-              <span className="value">{user.transactions.length}</span>
-              <span className="label">Transactions</span>
+              <span className="value">{giftMoney}</span>
+              <span className="label">Gifts</span>
             </div>
           </div>
 
@@ -215,6 +230,12 @@ export default function ProfilePage() {
             <Link href={"/withdrawl-details"} className="item-outer">
               <div className="item">
                 <span className="label">Withdrawl Details</span>
+                <FaChevronRight />
+              </div>
+            </Link>
+            <Link href={"/uploads"} className="item-outer">
+              <div className="item">
+                <span className="label">Uploads</span>
                 <FaChevronRight />
               </div>
             </Link>

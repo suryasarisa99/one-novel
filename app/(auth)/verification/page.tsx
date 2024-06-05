@@ -26,6 +26,7 @@ function VerificationComponent() {
   const id = searchParams.get("id") || "";
   const email = searchParams.get("email") || "";
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const { setUser, setToken, setIsLoggedIn } = useData();
 
@@ -42,6 +43,7 @@ function VerificationComponent() {
     const otp = otpInputsRef.current.map((input) => input.value).join("");
     console.log(id);
     console.log(otp);
+    setLoading(true);
     axios
       .post(`${process.env.NEXT_PUBLIC_SERVER}/auth/otp`, {
         otp,
@@ -111,6 +113,9 @@ function VerificationComponent() {
         }
         console.log("before calling show popup");
         ShowPopup();
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
@@ -185,7 +190,9 @@ function VerificationComponent() {
           ))}
         </div>
         <center>
-          <button onClick={Submit}>Submit</button>
+          <button onClick={Submit}>
+            {loading ? <div className="loader"></div> : "Submit"}
+          </button>
         </center>
       </div>
       {popupIsOpened &&
