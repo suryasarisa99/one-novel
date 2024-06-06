@@ -17,23 +17,24 @@ export default function UploadPage() {
           return (
             <div className="transaction upload" key={index}>
               <div className="left">
-                <button
+                {/* <button
                   onClick={() => {
                     open(book.url, "_blank");
                   }}
                 >
                   View Book {index + 1}
-                </button>
+                </button> */}
+                Status
               </div>
               <div className="right">
                 <p className={"status " + book.status}>{book.status}</p>
-                <div className="date">
+                {/* <div className="date">
                   {new Date(book.date).toLocaleDateString("en-GB", {
                     day: "2-digit",
                     month: "2-digit",
                     year: "2-digit",
                   })}
-                </div>
+                </div> */}
               </div>
             </div>
           );

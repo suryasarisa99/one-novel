@@ -6,7 +6,6 @@ import useData from "@/hooks/useData";
 import { createPortal } from "react-dom";
 import PopupBox from "@/components/PopupBox";
 import usePopup from "@/hooks/usePopup";
-import firebase from "firebase/app";
 import {
   ref,
   uploadBytes,
