@@ -73,7 +73,6 @@ export default function LoginPage() {
         password,
       })
       .then((res) => {
-        console.log(res.data);
         if (res.data.isLogedIn) {
           setUser(res.data.user as UserType);
           setToken(res.data.token as string);

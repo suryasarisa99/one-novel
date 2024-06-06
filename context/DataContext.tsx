@@ -32,7 +32,6 @@ export default function DataProvider({
       .then((res) => {
         if (res.data.isLogedIn) {
           console.log("Logged In");
-          console.log(res.data);
           setUser(res.data.user);
           setIsLoggedIn(true);
         }
