@@ -38,7 +38,7 @@ export default function WithdrawlPage() {
     return () => {
       HidePopup();
     };
-  });
+  }, []);
 
   function ValidateUpiId(upiId: string) {
     const regex = /^([a-zA-Z1-9-]+)@([a-zA-Z]+)$/;
