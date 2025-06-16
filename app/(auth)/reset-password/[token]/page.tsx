@@ -25,7 +25,7 @@ export default function ResetPassword() {
     return () => {
       HidePopup();
     };
-  });
+  }, []);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -55,7 +55,6 @@ export default function ResetPassword() {
         password,
       })
       .then((res) => {
-        console.log(res.data);
         setPopupContent({
           title: "Password Reset",
           content:
@@ -69,6 +68,7 @@ export default function ResetPassword() {
         ShowPopup();
       })
       .catch((err) => {
+        console.log(err);
         setPopupContent({
           title: err.response.data.title || "Error",
           content: err.response.data.error || "Something went wrong",
@@ -83,7 +83,7 @@ export default function ResetPassword() {
 
   return (
     <div className="reset-password auth">
-      {popupIsOpened &&
+      {true &&
         createPortal(
           <PopupBox
             title={popupContent.title}
