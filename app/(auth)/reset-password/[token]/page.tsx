@@ -83,7 +83,7 @@ export default function ResetPassword() {
 
   return (
     <div className="reset-password auth">
-      {true &&
+      {popupIsOpened &&
         createPortal(
           <PopupBox
             title={popupContent.title}
