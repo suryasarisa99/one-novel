@@ -169,7 +169,7 @@ export default function ProfilePage() {
             className="refer-code-box"
           >
             <div className="title">
-              <span>Referal Code</span>
+              <span>Referral Code</span>
               <div
                 className="icon"
                 // initial={{ scale: 1 }}
@@ -177,8 +177,9 @@ export default function ProfilePage() {
                 //   scale: 0.7,
                 // }}
                 onClick={() => {
+                  const url = process.env.NEXT_PUBLIC_FRONTEND_URL;
                   navigator?.clipboard?.writeText(
-                    `https://www.onenovel.in/register?ref=${user._id}`
+                    `${url}/register?ref=${user._id}`
                   );
                   setIsCopied(true);
                   setTimeout(() => {
@@ -212,7 +213,7 @@ export default function ProfilePage() {
             </Link> */}
             <Link href="/referals" className="item-outer">
               <div className="item">
-                <span className="label">Referals</span>
+                <span className="label">Referrals</span>
                 <FaChevronRight />
               </div>
             </Link>

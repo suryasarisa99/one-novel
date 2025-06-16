@@ -120,6 +120,13 @@
 }
 
 .auth {
+  &.split-page {
+    align-items: center;
+    .left form {
+      min-height: 50vh;
+      max-width: 480px;
+    }
+  }
   .errors {
     margin-bottom: 8px;
   }
