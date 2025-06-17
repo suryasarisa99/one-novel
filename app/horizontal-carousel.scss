@@ -1,7 +1,7 @@
 .horizontal-section {
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  height: 100vh !important;
+  height: 100dvh !important;
   // width: 100vw !important;
   flex-shrink: 0;
   overflow-y: hidden;
@@ -17,7 +17,7 @@
 
       .writer-img-outer {
         width: 50vw;
-        height: calc(100vh - 80px);
+        height: calc(100dvh - 80px);
         padding: 30px;
         display: flex;
         justify-content: center;
@@ -114,7 +114,7 @@
 
     .left,
     .right {
-      height: calc(100vh - 75px);
+      height: calc(100dvh - 75px);
       flex-shrink: 0;
     }
     .left {
@@ -188,13 +188,13 @@
 @media screen and (max-width: 1000px) {
   .horizontal-section {
     overflow-y: hidden !important;
-    height: 100vh;
+    height: 100dvh;
     &.sec1 {
       .content {
         flex-direction: column;
         align-items: center;
         overflow-y: hidden !important;
-        height: 100vh;
+        height: 100dvh;
         padding-top: 75px;
 
         // background-color: green;
@@ -226,7 +226,7 @@
     &.sec2 {
       flex-direction: column;
       overflow-y: hidden !important;
-      height: 100vh;
+      height: 100dvh;
 
       .left,
       .right {
@@ -270,7 +270,7 @@
       flex-direction: column;
       padding-top: 60px;
       overflow-y: hidden !important;
-      height: 100vh;
+      height: 100dvh;
 
       .left {
         width: 100vw;

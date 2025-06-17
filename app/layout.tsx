@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <meta name="theme-color" content="#000000"></meta>
+        <meta name="theme-color" content="#f5f4f0"></meta>
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"

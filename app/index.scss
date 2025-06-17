@@ -93,13 +93,13 @@ button,
 }
 .split-page {
   .right {
-    min-height: 100vh;
+    min-height: 100dvh;
   }
 }
 
 .split-page,
 .split-page-mb {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   overflow: auto;
   position: relative;
@@ -238,7 +238,7 @@ html {
   background-color: red !important;
   // position: relative;
   display: flex;
-  min-height: 100vh;
+  min-height: 100dvh;
   height: fit-content;
   .new-left {
     background-color: green !important;

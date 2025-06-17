@@ -87,7 +87,7 @@ body {
   scroll-snap-type: y mandatory;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 100vh;
+  height: 100dvh;
   width: 100wh;
   scrollbar-width: 0px;
   &::-webkit-scrollbar {
@@ -139,7 +139,7 @@ body {
 .horizontal-carousel {
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  height: 100vh;
+  height: 100dvh;
 
   display: flex;
 
@@ -156,7 +156,7 @@ body {
 .home-page-section {
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   overflow: hidden;
   background-color: var(--primary-color);
@@ -172,7 +172,7 @@ body {
   img.main-img {
     position: absolute;
     top: 120px;
-    height: 100vh;
+    height: 100dvh;
     left: -150px;
     width: 100%;
     // scale: 1.5;
@@ -634,7 +634,7 @@ nav {
     img.main-img {
       // display: none;
       left: 0px;
-      height: 100vh;
+      height: 100dvh;
       width: 100vw;
       // scale: 1.85;
     }
@@ -771,7 +771,7 @@ nav {
     img.main-img {
       left: -180px;
       // display: none;
-      height: 100vh;
+      height: 100dvh;
       width: 120%;
       object-fit: cover;
       // scale: 1;

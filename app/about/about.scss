@@ -23,7 +23,7 @@
     padding: 80px;
     div {
       padding: 3em;
-      height: calc(100vh - 80px - 40px - 24px);
+      height: calc(100dvh - 80px - 40px - 24px);
       display: flex;
       align-items: center;
     }
@@ -41,7 +41,7 @@
       //   background-color: gray;
       display: flex;
       gap: 40px;
-      height: calc(100vh - 80px - 40px - 24px);
+      height: calc(100dvh - 80px - 40px - 24px);
       align-items: center;
       & > div {
         // background-color: red;

@@ -20,7 +20,7 @@ export default function PdfViewer() {
   return (
     <div
       style={{
-        height: "100vh",
+        height: "100dvh",
         backgroundColor: "#f5f5f5",
       }}
     >
